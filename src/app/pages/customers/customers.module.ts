@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { customerReducer } from './customers.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomersEffects } from './customer.effects';
+import { CustomerSearchComponent } from './customer-search/customer-search.component';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { CustomersEffects } from './customer.effects';
     }),
     EffectsModule.forFeature([CustomersEffects])
   ],
-  declarations: [CustomerContainerComponent, CustomerlistComponent, CustomerItemComponent],
+  declarations: [CustomerContainerComponent, CustomerlistComponent, CustomerItemComponent, CustomerSearchComponent],
   providers: [CustomersService]
 })
 export class CustomersModule { }
