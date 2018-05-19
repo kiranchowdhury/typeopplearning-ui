@@ -15,7 +15,7 @@
         font-size: 26px;
         font-weight: bold;
         text-align: center;
-        color: #666666;            
+        color: #666666;
     }
     .spacer {
         // flex: 0 0 auto;
@@ -37,8 +37,8 @@
     // border: 2px solid black;
      display: flex;
      flex-direction: column;
-     width: 426px;
-    
+     align-items: center;
+
     input {
      margin: 23px 23px 0px 23px;
      padding: 10px;
@@ -47,7 +47,7 @@
      border-radius: 3.1px;
      background-color: #fcfcfd;
      border: solid 0.6px #cccccc;
-    font-family: FontAwesome; 
+    font-family: FontAwesome;
     }
     .forgot-password {
         margin: 23px 0px 0px 43px;
@@ -55,8 +55,8 @@
         height: 19px;
         font-size: 16px;
         text-align: left;
-        color: #0f72e2;    
-        cursor: pointer;    
+        color: #0f72e2;
+        cursor: pointer;
     }
     .button-area {
         margin: 50px 23px 50px 33px;
@@ -87,7 +87,7 @@
     width: 380px;
     height: 60px;
     border-radius: 2px;
-    background-image: linear-gradient(279deg, #0f72e2, #09d1d6);    
+    background-image: linear-gradient(279deg, #0f72e2, #09d1d6);
 }
 
 .input-group.has-person-icon {
