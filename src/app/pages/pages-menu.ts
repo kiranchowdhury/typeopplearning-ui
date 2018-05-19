@@ -54,7 +54,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Invoices list',
-    icon: 'fa fa-dollar-sign',
+    icon: 'fa fa-usd',
     link: '/pages/invoices'
   },
   {
