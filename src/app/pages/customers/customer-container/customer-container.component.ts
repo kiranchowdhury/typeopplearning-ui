@@ -21,7 +21,7 @@ export class CustomerContainerComponent implements OnInit {
       (custState: CustomersState) => {
         this.loading = custState.loading;
         this.loadingMsg = custState.loadingMsg;
-        // this.customers = custState.customers;
+        this.customers = custState.customers;
         // console.log("CUSTOMERS", this.customers);
       }
     )

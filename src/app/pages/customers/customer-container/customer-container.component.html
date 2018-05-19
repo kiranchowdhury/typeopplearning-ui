@@ -1,2 +1,4 @@
 <ep-busy-indicator *ngIf="loading" [loadingMsg]="loadingMsg"></ep-busy-indicator>
-<router-outlet *ngIf="!loading"></router-outlet>
+<tl-customerlist>
+  <tl-customer-item *ngFor="let customer of customers" [customer]="customer"></tl-customer-item>
+</tl-customerlist>

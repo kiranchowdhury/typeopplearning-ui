@@ -7,14 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: CustomerContainerComponent,
-    children: [{
-      path:'lists',
-      component: CustomerlistComponent
-    }, {
-      path: '',
-      redirectTo: 'lists',
-      pathMatch: 'full'
-    }]
+    children: []
   }
 ];
 

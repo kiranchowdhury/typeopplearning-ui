@@ -14,7 +14,7 @@ exports.doGet = function(req, res) {
   var apiUrl = config[backendServer].apiUrl;
   var certPath = config[backendServer].certPath;
   var cert = fs.readFileSync(certPath);
-  var id = token.body.sub; 
+  var id = token.body.sub;
   var pwd = token.body.permissions;
   console.log('ID AND PWD IS' + id +' & '+pwd);
   console.log("Query String is ", req.query);
@@ -77,7 +77,7 @@ createDummyCustomers = function(){
       id: 'CustId-'+i,
       name: 'Cust Name-'+i,
       contactName: 'Cust Contact-'+i,
-      numberOfUsers: i*12,
+      noOfUsers: i*12,
       email: 'custemai_'+i+'@'+'Cust Name-'+i+'.com',
       phone: '00'+i+'1011',
       address: 'Cust Address-'+i

@@ -17,7 +17,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'How To',
     icon: 'fa fa-commenting-o',
     link: '/pages/howto',
-  },  
+  },
   {
     title: 'FAQ',
     icon: 'fa fa-question-circle-o',
@@ -35,16 +35,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Purchase Training',
-        link: '/pages/subscriptions/purchase'        
+        link: '/pages/subscriptions/purchase'
       },
       {
         title: 'Allowed Training',
-        link: '/pages/subscriptions/allowedtraining'        
+        link: '/pages/subscriptions/allowedtraining'
       },
       {
         title: 'Budget',
-        link: '/pages/subscriptions/budget'        
-      }            
+        link: '/pages/subscriptions/budget'
+      }
     ]
   },
   {
