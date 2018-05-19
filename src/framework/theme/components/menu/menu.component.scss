@@ -23,7 +23,7 @@
     align-items: center;
 
     .menu-title {
-      margin-left: 5px;
+      // margin-left: 5px;
       flex: 1;
       @include nb-rtl(text-align, right);
     }

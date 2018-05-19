@@ -22,11 +22,11 @@ import { StateService } from '../../../@core/data/state.service';
     <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'" [authenticated]="authenticated"></ngx-header>
   </nb-layout-header>
 
-  <nb-sidebar *ngIf="authenticated"  class="menu-sidebar"
+  <nb-sidebar  class="menu-sidebar"
                tag="menu-sidebar"
                responsive
                [end]="sidebar.id === 'end'">
-
+    
     <ng-content select="nb-menu"></ng-content>
   </nb-sidebar>
 
@@ -45,6 +45,7 @@ export class SampleLayoutComponent implements OnDestroy {
 
   layout: any = {};
   sidebar: any = {};
+  displaySidebar: string;
 
   protected layoutState$: Subscription;
   protected sidebarState$: Subscription;
@@ -75,6 +76,10 @@ export class SampleLayoutComponent implements OnDestroy {
           this.sidebarService.collapse('menu-sidebar');
         }
       });
+  }
+
+  getSideBarDisplay() {
+    return this.authenticated? "block": "none";
   }
 
   ngOnDestroy() {
