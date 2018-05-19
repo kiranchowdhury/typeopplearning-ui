@@ -4,6 +4,7 @@ import { BusyIndicatorComponent } from './busy-indicator/busy-indicator.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalComponent } from './modal/modal.component';
+import { TlDesignModule } from '../@tldesign/tl-design.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ModalComponent } from './modal/modal.component';
     ReactiveFormsModule,
     RouterModule,
     BusyIndicatorComponent,
-    ModalComponent
+    ModalComponent,
+    TlDesignModule
   ],
   entryComponents: [ModalComponent]
 })
