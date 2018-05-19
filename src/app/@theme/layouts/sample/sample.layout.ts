@@ -31,6 +31,7 @@ import { StateService } from '../../../@core/data/state.service';
   </nb-sidebar>
 
   <nb-layout-column class="main-content">
+    Area for bread crumb
     <ng-content select="router-outlet"></ng-content>
   </nb-layout-column>
 
