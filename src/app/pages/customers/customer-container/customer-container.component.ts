@@ -13,7 +13,7 @@ export class CustomerContainerComponent implements OnInit {
   loading: boolean = false;
   loadingMsg: string = '';
   customers: Customer[];
-
+  btnImg = require('../../../../assets/btn-add-new.svg');
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {

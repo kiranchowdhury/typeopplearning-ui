@@ -22,7 +22,7 @@ import { StateService } from '../../../@core/data/state.service';
     <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'" [authenticated]="authenticated"></ngx-header>
   </nb-layout-header>
 
-  <nb-sidebar  class="menu-sidebar"
+  <nb-sidebar *ngIf="authenticated" class="menu-sidebar"
                tag="menu-sidebar"
                responsive
                [end]="sidebar.id === 'end'">

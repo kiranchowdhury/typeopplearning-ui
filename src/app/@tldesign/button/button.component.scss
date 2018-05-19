@@ -1,10 +1,4 @@
-.btn_add_new {
-    width: 164px;
-    height: 40px;
-    object-fit: contain;
-  }
-
-  .Rectangle-3 {
+  .btn-default {
     width: 164px;
     height: 40px;
     border-radius: 2px;
@@ -12,10 +6,9 @@
     border: solid 1px #0f72e2;
   }
 
-  .New {
+  .label {
     width: 35px;
     height: 20px;
-    font-family: Helvetica;
     font-size: 17px;
     font-weight: normal;
     font-style: normal;
@@ -24,4 +17,9 @@
     letter-spacing: 0.2px;
     text-align: left;
     color: #0f72e2;
+  }
+
+  .icon-style {
+    font-size:19px;
+    color:#0f72e2;      
   }
