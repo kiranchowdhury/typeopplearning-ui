@@ -8,7 +8,5 @@
         <span btnlabel> Edit</span>
     </tl-button>
 </div>
-<tl-customerlist>
-  <tl-customer-item *ngFor="let customer of customers" [customer]="customer"></tl-customer-item>
-</tl-customerlist>
+<tl-customerlist *ngIf="!loading"></tl-customerlist>
 
