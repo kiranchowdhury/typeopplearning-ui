@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../@models/app-state';
+import { selectorCustomers, GetCustomerAction } from '../customers.reducer';
+import { CustomersState, Customer } from '../customers-state';
+
+
 
 @Component({
   selector: 'tl-customerlist',
@@ -6,10 +12,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customerlist.component.scss']
 })
 export class CustomerlistComponent implements OnInit {
-
-  constructor() { }
+  customers: Customer[];
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.store.select(selectorCustomers).subscribe(
+      (custState: CustomersState) => {
+        this.customers = custState.customers;
+        console.log("CUSTOMERS", this.customers);
+      }
+    )
   }
-
 }
