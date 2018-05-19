@@ -13,7 +13,7 @@ export class CustomerContainerComponent implements OnInit {
   loading: boolean = false;
   loadingMsg: string = '';
   customers: Customer[];
-  btnImg = require('../../../../assets/btn-add-new.svg');
+  mode: string  = 'view';
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
@@ -27,6 +27,11 @@ export class CustomerContainerComponent implements OnInit {
     )
 
     this.store.dispatch(new GetCustomerAction());
+  }
+
+
+  toggleMode() {
+    this.mode = this.mode === 'view' ? 'edit' : 'view';
   }
 
 }

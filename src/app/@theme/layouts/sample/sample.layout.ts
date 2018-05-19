@@ -31,7 +31,7 @@ import { StateService } from '../../../@core/data/state.service';
   </nb-sidebar>
 
   <nb-layout-column class="main-content">
-    Area for bread crumb
+   <tl-breadcrumb *ngIf="authenticated"></tl-breadcrumb>
     <ng-content select="router-outlet"></ng-content>
   </nb-layout-column>
 
@@ -77,6 +77,9 @@ export class SampleLayoutComponent implements OnDestroy {
           this.sidebarService.collapse('menu-sidebar');
         }
       });
+      this.menuService.getSelectedItem().subscribe(
+        item => console.log('Menu Item', item)
+      )
   }
 
   getSideBarDisplay() {

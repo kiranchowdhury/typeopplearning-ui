@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
 import { selectorCustomers, GetCustomerAction } from '../customers.reducer';
@@ -13,6 +13,7 @@ import { CustomersState, Customer } from '../customers-state';
 })
 export class CustomerlistComponent implements OnInit {
   customers: Customer[];
+  @Input() mode: string;
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
