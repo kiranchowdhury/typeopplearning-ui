@@ -8,10 +8,10 @@
         <span btnlabel> Edit</span>
     </tl-button>
 </div>
-<div>
-  <tl-customer-search></tl-customer-search>
-  <tl-button-small [icon]="'fa fa-search'"></tl-button-small>
-</div>
+
+<tl-customer-search></tl-customer-search>
+
+
 <tl-customerlist>
   <tl-customer-item *ngFor="let customer of customers" [customer]="customer"></tl-customer-item>
 </tl-customerlist>

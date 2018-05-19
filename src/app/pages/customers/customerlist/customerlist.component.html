@@ -12,16 +12,18 @@
 </table> -->
 <table class="table">
     <thead>
-      <tr>
-
+      <tr class="table-header">
         <th scope="col">Customer name</th>
         <th scope="col">Contact name</th>
         <th scope="col">Users</th>
       </tr>
     </thead>
     <tbody>
-        <tr>
-          <ng-content></ng-content>
+        <tr *ngFor="let customer of customers">
+            <!-- <tl-customer-item [customer]="customer"></tl-customer-item> -->
+            <td>{{customer.name}}</td>
+            <td>{{customer.contactName}}</td>
+            <td>{{customer.noOfUsers}}</td>
         </tr>
       <!-- <tl-customer-item *ngFor="let cust of customers" [customer]="cust"></tl-customer-item> -->
     </tbody>

@@ -10,6 +10,7 @@ $nb-enabled-themes: (default, cosmic);
 
 $nb-themes: nb-register-theme((
  // app wise variables for each theme
+ color-fg: #2a2a2a,
   menu-item-padding: 1.5rem 0.75rem,
   menu-submenu-padding: 1.5rem 0.75rem,
   sidebar-header-gap: 2rem,
@@ -34,7 +35,7 @@ $nb-themes: nb-register-theme((
   // menu-item-separator: #FFFFFF,
 
   font-main: Roboto,
-  font-secondary: Exo,
+  font-secondary: Roboto,
 ), default, default);
 
 $nb-themes: nb-register-theme((

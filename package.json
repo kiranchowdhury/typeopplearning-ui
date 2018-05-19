@@ -1,18 +1,19 @@
 {
-  "name": "ngx-admin",
-  "version": "2.2.0",
+  "name": "typeopplearning",
+  "version": "1.1.1-rc2",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/ngx-admin.git"
+    "url": ""
   },
   "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
+    "url": ""
   },
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.config.json --open",
+    "node:start": "node server.js",
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",
