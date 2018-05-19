@@ -4,9 +4,9 @@
     <tl-button [icon]="'fa fa-plus-circle'">
         <span btnlabel> New</span>
     </tl-button>
-    <tl-button [icon]="'fa fa-edit'">
+    <tl-button [icon]="'fa fa-edit'" (onClick)="onEdit()">
         <span btnlabel> Edit</span>
     </tl-button>
 </div>
-<tl-customerlist *ngIf="!loading"></tl-customerlist>
+<tl-customerlist *ngIf="!loading" [mode]="mode"></tl-customerlist>
 

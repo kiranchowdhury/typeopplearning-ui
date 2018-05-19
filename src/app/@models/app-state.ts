@@ -5,6 +5,11 @@ import { CustomersState } from '../pages/customers/customers-state';
 export interface AppState {
     login: LoginState;
     auth: AuthState;
+    breadcrumbs: {
+        title: string;
+        link: string;
+        active: boolean;
+    }
     customers: {
         custState: CustomersState
     }

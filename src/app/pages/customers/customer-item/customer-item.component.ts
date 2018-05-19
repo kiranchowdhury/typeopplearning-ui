@@ -9,6 +9,7 @@ import { Customer } from '../customers-state';
 })
 export class CustomerItemComponent implements OnInit {
   @Input() customer: Customer;
+  @Input() mode: string;
   constructor() { }
   ngOnInit() {
   }

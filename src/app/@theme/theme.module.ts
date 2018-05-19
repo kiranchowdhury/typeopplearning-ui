@@ -41,6 +41,7 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { SharedModule } from '../@shared/shared.module';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -99,7 +100,7 @@ const NB_THEME_PROVIDERS = [
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES, BreadcrumbComponent],
   entryComponents: [LoginDialogComponent]
 })
 export class ThemeModule {
