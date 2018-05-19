@@ -1,5 +1,13 @@
 
 <ep-busy-indicator *ngIf="loading" [loadingMsg]="loadingMsg"></ep-busy-indicator>
+<div class="customerAction">
+    <tl-button [icon]="'fa fa-plus-circle'">
+        <span btnlabel> New</span>
+    </tl-button>
+    <tl-button [icon]="'fa fa-edit'">
+        <span btnlabel> Edit</span>
+    </tl-button>
+</div>
 <tl-customerlist>
   <tl-customer-item *ngFor="let customer of customers" [customer]="customer"></tl-customer-item>
 </tl-customerlist>
