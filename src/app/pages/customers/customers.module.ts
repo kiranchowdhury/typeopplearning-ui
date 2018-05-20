@@ -13,19 +13,23 @@ import { EffectsModule } from '@ngrx/effects';
 import { CustomersEffects } from './customer.effects';
 import { CustomerSearchComponent } from './customer-search/customer-search.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { NewCustomerComponent } from './new-customer/new-customer.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   imports: [
     SharedModule,
     CustomersRoutingModule,
+    NgbModule,
     AgGridModule.withComponents([]),
     StoreModule.forFeature('customers',{
         custState: customerReducer
     }),
     EffectsModule.forFeature([CustomersEffects])
   ],
-  declarations: [CustomerContainerComponent, CustomerlistComponent, CustomerItemComponent, CustomerSearchComponent],
+  declarations: [CustomerContainerComponent, CustomerlistComponent, CustomerItemComponent, CustomerSearchComponent, NewCustomerComponent],
+  entryComponents: [NewCustomerComponent],
   providers: [CustomersService]
 })
 export class CustomersModule { }

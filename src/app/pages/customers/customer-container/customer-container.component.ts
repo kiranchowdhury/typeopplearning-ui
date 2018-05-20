@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
 import { selectorCustomers, GetCustomerAction } from '../customers.reducer';
 import { CustomersState, Customer } from '../customers-state';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewCustomerComponent } from '../new-customer/new-customer.component';
 
 @Component({
   selector: 'tl-customer-container',
@@ -14,7 +16,8 @@ export class CustomerContainerComponent implements OnInit {
   loadingMsg: string = '';
   customers: Customer[];
   mode: string  = 'view';
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.store.select(selectorCustomers).subscribe(
@@ -32,6 +35,11 @@ export class CustomerContainerComponent implements OnInit {
 
   toggleMode() {
     this.mode = this.mode === 'view' ? 'edit' : 'view';
+  }
+
+  openNewCustomerDialog() {
+    alert('opening..');
+    const activeModal = this.modalService.open(NewCustomerComponent, {});
   }
 
 }

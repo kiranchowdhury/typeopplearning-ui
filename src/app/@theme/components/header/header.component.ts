@@ -10,7 +10,6 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
 import { ActionSignOut } from '../../../@core/login/login.reducer';
-import { CurrentUser } from '../../../@core/context/user.model';
 
 @Component({
   selector: 'ngx-header',
@@ -65,7 +64,7 @@ export class HeaderComponent implements OnInit {
     this.analyticsService.trackEvent('startSearch');
   }
   openLoginModal() {
-    console.log('Opening Login dialog');
+   // console.log('Opening Login dialog');
     const activeModal = this.modalService.open(LoginDialogComponent, {});
    // activeModal.componentInstance.modalHeader = 'SIGN IN';
 
