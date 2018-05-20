@@ -26,7 +26,7 @@ module.exports = function(app, config) {
     var pwd = payload.password;
     var secretKey = '46443c94-16f3-400d-98cb-b46547193155';
     var token = generateToken(email, pwd, secretKey);
-    res.send({token: token});
+    res.send({token: token, email: email, role: 'admin', name: 'Kiran Chowdhury'});
   //  var apiUrl = conf[backendServer].apiUrl;
   //  var certPath = conf[backendServer].certPath;
  //   var cert = fs.readFileSync(certPath);

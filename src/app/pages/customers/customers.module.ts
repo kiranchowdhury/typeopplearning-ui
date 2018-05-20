@@ -12,12 +12,14 @@ import { customerReducer } from './customers.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomersEffects } from './customer.effects';
 import { CustomerSearchComponent } from './customer-search/customer-search.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
   imports: [
     SharedModule,
     CustomersRoutingModule,
+    AgGridModule.withComponents([]),
     StoreModule.forFeature('customers',{
         custState: customerReducer
     }),
