@@ -58,7 +58,7 @@ exports.doPost = function(req, res) {
 */
 
 exports.getCustomers = function(req, res) {
-  console.log('Get Customers Api Called');
+  //console.log('Get Customers Api Called');
  var customers = createDummyCustomers();
   var resp = {
     status: 1,
@@ -66,6 +66,17 @@ exports.getCustomers = function(req, res) {
     message: 'success',
     customers: customers,
     count: customers.length
+  }
+  res.send(resp);
+}
+
+exports.createCustomer = function(req, res) {
+  console.log('Createting customer', req.body);
+  var resp = {
+    status: 1,
+    code: 'OK',
+    message: 'success',
+    customer: req.body   
   }
   res.send(resp);
 }

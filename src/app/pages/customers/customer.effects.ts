@@ -4,9 +4,9 @@ import { Actions, Effect } from "@ngrx/effects";
 import { CustomersService } from "./customers.service";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable'
-import { CustomersActionTypes, GetCustomerAction, GetCustomerSuccessAction, GetCustomerFailAction } from "./customers.reducer";
-import { switchMap, map } from "rxjs/operators";
-import { GetCustomersResponse } from "./customer-contracts";
+import { CustomersActionTypes, GetCustomerAction, GetCustomerSuccessAction, GetCustomerFailAction, CreateCustomerAction, CreateCustomerSuccessAction, CreateCustomerFailAction } from "./customers.reducer";
+import { switchMap, map, tap } from "rxjs/operators";
+import { GetCustomersResponse, CreateCustomerResponse } from "./customer-contracts";
 
 @Injectable()
 export class CustomersEffects {
@@ -29,4 +29,21 @@ export class CustomersEffects {
             )
         )
     }
+
+    @Effect()
+    createCustomer(): Observable<Action> {
+        // console(act)
+        return this.action$.ofType(CustomersActionTypes.CREATE_CUSTOMER).pipe(
+         //   tap(() => console.log('In the effects,')),
+            switchMap((action: CreateCustomerAction) =>                
+                this.customerService.createCustomer(action.payload)
+                .pipe(
+                    tap((resp: CreateCustomerResponse) => console.log('In the effects payload---', action.payload)),
+                    map((resp: CreateCustomerResponse) => (resp.status === 1)?
+                    new CreateCustomerSuccessAction(resp)
+                    : new CreateCustomerFailAction({code: resp.code, message: resp.message}))
+                ))
+        )
+    }
+
 }

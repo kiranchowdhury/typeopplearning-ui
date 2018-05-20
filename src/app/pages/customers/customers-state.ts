@@ -1,6 +1,7 @@
 export interface CustomersState {
-    errorCode?: string;
-    errorMsg?: string;
+    code?: string;
+    message?: string;
+    isError?: boolean;
     loading?: boolean;
     loadingMsg?: string;
     customers: Customer[];

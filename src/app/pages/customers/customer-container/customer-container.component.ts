@@ -38,7 +38,6 @@ export class CustomerContainerComponent implements OnInit {
   }
 
   openNewCustomerDialog() {
-    alert('opening..');
     const activeModal = this.modalService.open(NewCustomerComponent, {});
   }
 

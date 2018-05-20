@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppState } from '../../../@models/app-state';
+import { Store } from '@ngrx/store';
+import { CreateCustomerAction } from '../customers.reducer';
 
 @Component({
   selector: 'tl-new-customer',
@@ -9,14 +12,17 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewCustomerComponent implements OnInit {
   form: FormGroup = new FormGroup({
+    id: new FormControl('0'),
     name: new FormControl(''),
     contactName: new FormControl(''),
     email: new FormControl(''),
     phone: new FormControl(''),
     address: new FormControl(''),
-    noOfUsers: new FormControl(''),
+    noOfUsers: new FormControl(),
   });
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(
+      private activeModal: NgbActiveModal,
+      private store: Store<AppState>) { }
 
   ngOnInit() {
   }
@@ -26,9 +32,9 @@ export class NewCustomerComponent implements OnInit {
   }
 
   createCustomer() {
-    console.log("Login Payload", this.form.value);
+   console.log('Hi There', this.form.value);
     this.closeModal();
+    this.store.dispatch(new CreateCustomerAction(this.form.value))
     // this.store.dispatch(new ActionSignIn(this.form.value));
   }
-
 }

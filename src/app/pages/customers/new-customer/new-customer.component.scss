@@ -45,21 +45,20 @@
 }
 .content-area {
     // border: 2px solid black;
-    margin-top: 10px;
      display: flex;
      flex-direction: column;
      align-items: center;
 
-    // input {
-    //  margin: 23px 23px 0px 23px;
-    //  padding: 10px;
-    //  width: 380px;
-    //  height: 60px;
-    //  border-radius: 3.1px;
-    //  background-color: #fcfcfd;
-    //  border: solid 0.6px #cccccc;
-    // font-family: FontAwesome;
-    // }
+    input {
+     margin: 23px 23px 0px 23px;
+     padding: 10px;
+     width: 380px;
+     height: 60px;
+     border-radius: 3.1px;
+     background-color: #fcfcfd;
+     border: solid 0.6px #cccccc;
+     // font-family: FontAwesome;
+    }
     .forgot-password {
         margin: 23px 0px 0px 43px;
         width: 140px;
@@ -70,7 +69,7 @@
         cursor: pointer;
     }
     .button-area {
-        margin: 50px 23px 50px 33px;
+        margin: 20px 23px 50px 33px;
         cursor: pointer;
 
         button {

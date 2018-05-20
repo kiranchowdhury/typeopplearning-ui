@@ -97,6 +97,7 @@ module.exports = function(app, config) {
   //set up api routes
   //app.use('/api', api);
   app.get('/api/customers/getall', restcontroller.getCustomers);
+  app.post('/api/customers/create', restcontroller.createCustomer);
   app.get('/api/get', restcontroller.doGet);
   app.post('/api/post', restcontroller.doPost);
   
