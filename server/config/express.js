@@ -97,9 +97,10 @@ module.exports = function(app, config) {
   //set up api routes
   //app.use('/api', api);
   app.get('/api/customers/getall', restcontroller.getCustomers);
+  app.get('/api/training-library/getall', restcontroller.getAllTrainingLibrary);
   app.get('/api/get', restcontroller.doGet);
   app.post('/api/post', restcontroller.doPost);
-  
+
 
 
 	// Catch all other routes and return the index file

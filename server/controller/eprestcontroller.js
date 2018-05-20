@@ -70,6 +70,19 @@ exports.getCustomers = function(req, res) {
   res.send(resp);
 }
 
+exports.getAllTrainingLibrary = function(req, res) {
+  console.log('Get getAllTrainingLibrary Api Called');
+  var trainingLibrary = createDummyTrainingLibrary();
+  var resp = {
+    status: 1,
+    code: 'OK',
+    message: 'success',
+    trainingLibrary: trainingLibrary,
+    count: trainingLibrary.length
+  }
+  res.send(resp);
+}
+
 createDummyCustomers = function(){
   customers = [];
   for(var i=0; i<100; i++) {
@@ -86,4 +99,16 @@ createDummyCustomers = function(){
   return customers;
 }
 
-
+createDummyTrainingLibrary = function(){
+  let date = new Date();
+  trainingLibrary = [];
+  for(var i=0; i<100; i++) {
+    trainingLibrary.push({
+      id: 'id' + i,
+      equipment: 'Equipment '+ i,
+      trainingName: 'Training Name ' + i,
+      date: date
+    })
+  }
+  return trainingLibrary;
+}
