@@ -6,7 +6,10 @@ import { AppState } from '../../@models/app-state';
 export enum LoginActionTypes {
     SIGN_IN = 'Sign In',
     SIGN_IN_SUCCESS = 'Sign In Success',
-    SIGN_IN_FAIL = 'Sign In Fail'
+    SIGN_IN_FAIL = 'Sign In Fail',
+    SIGN_OUT = 'Sign Out',
+    SIGN_OUT_SUCCESS = 'Sign Out Success',
+    SIGN_OUT_FAIL = 'Sign Out Fail'
 }
 
 export class ActionSignIn implements Action {
@@ -24,9 +27,28 @@ export class ActionSignInFail implements Action {
     constructor(public payload: ErrorResponse) {}
 }
 
+export class ActionSignOut implements Action {
+  readonly type = LoginActionTypes.SIGN_OUT;
+  constructor(public payload: LoginRequest) {}
+}
+
+export class ActionSignOutSuccess implements Action {
+  readonly type = LoginActionTypes.SIGN_OUT_SUCCESS;
+  constructor(public payload: LoginResponse) {}
+}
+
+export class ActionSignOutFail implements Action {
+  readonly type = LoginActionTypes.SIGN_OUT_FAIL;
+  constructor(public payload: ErrorResponse) {}
+}
+
 export type LoginActions = ActionSignIn |
                            ActionSignInSuccess |
-                           ActionSignInFail
+                           ActionSignInFail |
+                           ActionSignOut |
+                           ActionSignOutSuccess |
+                           ActionSignOutFail
+
 
 export const initialLoginState: LoginState = {
     authenticated: false,
@@ -62,4 +84,34 @@ export function loginReducer(
         default:
             return state;
     }
+}
+
+export function logOutReducer(
+  state: LoginState = initialLoginState,
+  action: LoginActions
+): LoginState {
+  switch (action.type) {
+      case LoginActionTypes.SIGN_OUT:
+          return {
+              ...state,
+              loading: true,
+              loadingMsg: 'Signing out....',
+          }
+      case LoginActionTypes.SIGN_OUT_SUCCESS:
+          return {
+              ...state,
+              authenticated: false,
+              loading: false,
+              loadingMsg: ''
+          }
+      case LoginActionTypes.SIGN_OUT_FAIL:
+          return {
+              ...state,
+              error: action.payload,
+              loading: false,
+              loadingMsg: ''
+          }
+      default:
+          return state;
+  }
 }

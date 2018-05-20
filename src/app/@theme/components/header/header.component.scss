@@ -62,7 +62,7 @@
       letter-spacing: normal;
       text-align: left;
       color: #0f72e2;
-      
+
 
       // span {
       //   font-weight: nb-theme(font-weight-normal);
@@ -189,4 +189,33 @@
       display: none;
     }
   }
+}
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  list-style: none;
+  padding-right: 1.25rem;
+  width: auto;
+  text-align: center;
+  margin-left: -10px;
+  a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+}
+
+.loggedInUserDiv:hover  .dropdown-content{
+    display: block !important;
+}
+
+.loggedInUserDiv a {
+  display: flex;
+  align-items: center;
 }
