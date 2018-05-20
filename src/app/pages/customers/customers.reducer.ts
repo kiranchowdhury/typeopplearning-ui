@@ -1,13 +1,16 @@
 import { Action } from "@ngrx/store";
-import { GetCustomersResponse } from "./customer-contracts";
+import { GetCustomersResponse, CreateCustomerRequest, CreateCustomerResponse } from "./customer-contracts";
 import { ErrorResponse } from "../../@core/error/error-response";
-import { CustomersState } from "./customers-state";
+import { CustomersState, Customer } from "./customers-state";
 import { AppState } from "../../@models/app-state";
 
 export enum CustomersActionTypes {
     GET_CUSTOMERS = 'Get Customers',
     GET_CUSTOMERS_SUCCESS = 'Get Customers Success',
     GET_CUSTOMERS_FAIL = 'Get Customers Fail',
+    CREATE_CUSTOMER = 'Create Customer',
+    CREATE_CUSTOMER_SUCCESS = 'Create Customer Success',
+    CREATE_CUSTOMER_FAIL = 'Create Customer Fail',
 }
 
 export class GetCustomerAction implements Action {
@@ -25,7 +28,27 @@ export class GetCustomerFailAction implements Action {
     constructor(public payload: ErrorResponse) {}
 }
 
-export type CustomersActions = GetCustomerAction | GetCustomerSuccessAction | GetCustomerFailAction
+export class CreateCustomerAction implements Action {
+    readonly type = CustomersActionTypes.CREATE_CUSTOMER;
+    constructor(public payload: CreateCustomerRequest) {}
+}
+
+export class CreateCustomerSuccessAction implements Action {
+    readonly type = CustomersActionTypes.CREATE_CUSTOMER_SUCCESS;
+    constructor(public payload: CreateCustomerResponse) {}
+}
+
+export class CreateCustomerFailAction implements Action {
+    readonly type = CustomersActionTypes.CREATE_CUSTOMER_FAIL;
+    constructor(public payload: ErrorResponse) {}
+}
+
+export type CustomersActions = GetCustomerAction |
+                               GetCustomerSuccessAction |
+                               GetCustomerFailAction |
+                               CreateCustomerAction |
+                               CreateCustomerSuccessAction |
+                               CreateCustomerFailAction
 
 export const initialCustomerState: CustomersState = {
     loading: false,
@@ -60,10 +83,47 @@ export function customerReducer(
         case CustomersActionTypes.GET_CUSTOMERS_FAIL:
             return {
                 ...state,
-                errorCode: action.payload.code,
-                errorMsg: action.payload.message,
+                isError: true,
+                code: action.payload.code,
+                message: action.payload.message,
             }
+        case CustomersActionTypes.CREATE_CUSTOMER: {
+            console.log('Customer Payload####', action.payload)
+            return {
+                ...state,
+                loading: true,
+                loadingMsg: 'Creating Customer...'
+            }
+        }
+        case CustomersActionTypes.CREATE_CUSTOMER_SUCCESS: {
+            let customers = state.customers;
+            let count = state.count;
+            return {
+                ...state,
+                loading: false,
+                loadingMsg: '',
+                customers: patchItems(customers, action.payload.customer),
+                count: count + 1,
+                message: 'Customer created sucessfully'
+            }
+        }
+        case CustomersActionTypes.CREATE_CUSTOMER_FAIL: {
+            let customers = state.customers;
+            let count = state.count;
+            return {
+                ...state,
+                isError: true,
+                loading: false,
+                message: action.payload.message,
+                code: action.payload.code
+            }
+        }                
         default:
             return state;
     }
+}
+
+function patchItems(items: any[], item: any): any[] {
+    items.push(item);
+    return items;
 }

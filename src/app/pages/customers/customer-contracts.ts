@@ -16,3 +16,14 @@ export interface GetCustomersResponse {
     count: number;
     customers: Customer[];
 }
+
+export interface CreateCustomerRequest {
+    customer: Customer
+}
+
+export interface CreateCustomerResponse {
+    status: number;
+    code: string;
+    message: string;
+    customer: Customer;
+}

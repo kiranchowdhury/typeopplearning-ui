@@ -12,6 +12,15 @@
 
 @import './bootstrap-rtl';
 
+/** TL SPECIFIC STYLES ***/
+.tl-modal-button {
+  cursor: pointer;
+  width: 380px;
+  height: 60px;
+  border-radius: 2px;
+  background-image: linear-gradient(279deg, #0f72e2, #09d1d6);
+}
+
 /** AG GRID CUSTOMIZATION - TO TURN THE DATA TABLE INTO CARBON  DATA TABLE */
 $ag-mat-icons-path: "~ag-grid/src/styles/material-icons/";
 $ag-icons-path: "~ag-grid/src/styles/icons/";

@@ -98,6 +98,7 @@ module.exports = function(app, config) {
   //app.use('/api', api);
   app.get('/api/customers/getall', restcontroller.getCustomers);
   app.get('/api/training-library/getall', restcontroller.getAllTrainingLibrary);
+  app.post('/api/customers/create', restcontroller.createCustomer);
   app.get('/api/get', restcontroller.doGet);
   app.post('/api/post', restcontroller.doPost);
 

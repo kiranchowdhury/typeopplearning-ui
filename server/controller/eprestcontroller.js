@@ -70,6 +70,18 @@ exports.getCustomers = function(req, res) {
   res.send(resp);
 }
 
+exports.createCustomer = function(req, res) {
+  console.log('Createting customer', req.body);
+  var resp = {
+    status: 1,
+    code: 'OK',
+    message: 'success',
+    customer: req.body
+  }
+  res.send(resp);
+  }
+
+
 exports.getAllTrainingLibrary = function(req, res) {
   console.log('Get getAllTrainingLibrary Api Called');
   var trainingLibrary = createDummyTrainingLibrary();

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiConnectorService } from '../../@core/api-handlers/api-connector.service';
-import { GetCustomersResponse } from './customer-contracts';
+import { GetCustomersResponse, CreateCustomerResponse, CreateCustomerRequest } from './customer-contracts';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable'
 
@@ -9,11 +9,18 @@ import { Observable } from 'rxjs/Observable'
 })
 export class CustomersService {
 
-  constructor(private apiConnectore: ApiConnectorService) { }
+  constructor(private apiConnector: ApiConnectorService) { }
 
   getCustomers(): Observable<GetCustomersResponse> {
-    return this.apiConnectore.get('/api/customers/getall', {}).pipe(
+    return this.apiConnector.get('/api/customers/getall', {}).pipe(
       map((resp: GetCustomersResponse) => resp)
+    )
+  }
+
+  createCustomer(payload: CreateCustomerRequest): Observable<CreateCustomerResponse> {
+    console.log(payload);
+    return this.apiConnector.post('/api/customers/create', payload).pipe(
+      map((resp: CreateCustomerResponse) => resp)
     )
   }
 }
