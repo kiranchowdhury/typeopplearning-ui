@@ -33,7 +33,7 @@ import { UserService } from '../../../@core/context/user.service';
   </nb-sidebar>
 
   <nb-layout-column class="main-content">
-   <tl-breadcrumb *ngIf="authenticated"></tl-breadcrumb>
+   <!-- <tl-breadcrumb *ngIf="authenticated"></tl-breadcrumb> -->
     <ng-content select="router-outlet"></ng-content>
   </nb-layout-column>
 

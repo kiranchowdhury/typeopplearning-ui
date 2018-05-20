@@ -1,15 +1,17 @@
 
 <div class="title-area">
-    <div class="title-text">New Customer</div>
+  <div class="heading">
+    <span class="title-text">New Customer</span>
     <!-- <div class="spacer"></div> -->
     <button class="close" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  </div>
   
   <form [formGroup]="form" (ngSubmit)="createCustomer()">
   <div class="content-area">
-    <div>
+    <div class="form-group">
         <input type="text" class="form-control" placeholder="Customer Name" formControlName="name" required>
     </div>
     <div>
