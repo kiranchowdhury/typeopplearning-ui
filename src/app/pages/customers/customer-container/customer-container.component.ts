@@ -15,8 +15,12 @@ import { CreateCustomerRequest } from '../customer-contracts';
 export class CustomerContainerComponent implements OnInit {
   loading: boolean = false;
   loadingMsg: string = '';
+  isError: boolean = false;
+  code: string = '';
+  apiMessage: string = '';
   customers: Customer[];
   mode: string  = 'view';
+  tostrPayLoad;
   constructor(private store: Store<AppState>,
     private modalService: NgbModal) { }
 
@@ -26,11 +30,27 @@ export class CustomerContainerComponent implements OnInit {
         this.loading = custState.loading;
         this.loadingMsg = custState.loadingMsg;
         this.customers = custState.customers;
+        this.apiMessage = custState.message;
+        this.code = custState.code;
+        this.isError = custState.isError;
         // console.log("CUSTOMERS", this.customers);
+        this.createTostrPayload();
       }
     )
 
     this.store.dispatch(new GetCustomerAction());
+  }
+
+  createTostrPayload() {
+    if (this.isError) {
+      this.tostrPayLoad = {level: 'E', message: this.code + ':' + this.apiMessage}
+    } else {
+      this.tostrPayLoad = {level: 'S', message: this.apiMessage}
+    }
+  }
+
+  resetToastrPayload() {
+    this.tostrPayLoad = {};
   }
 
 

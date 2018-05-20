@@ -5,11 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalComponent } from './modal/modal.component';
 import { TlDesignModule } from '../@tldesign/tl-design.module';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   imports: [
   ],
-  declarations: [BusyIndicatorComponent, ModalComponent],
+  declarations: [BusyIndicatorComponent, ModalComponent, NotificationComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -17,7 +18,8 @@ import { TlDesignModule } from '../@tldesign/tl-design.module';
     RouterModule,
     BusyIndicatorComponent,
     ModalComponent,
-    TlDesignModule
+    TlDesignModule,
+    NotificationComponent
   ],
   entryComponents: [ModalComponent]
 })

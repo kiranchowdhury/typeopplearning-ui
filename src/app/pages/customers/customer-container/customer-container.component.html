@@ -1,5 +1,10 @@
 
 <ep-busy-indicator *ngIf="loading" [loadingMsg]="loadingMsg"></ep-busy-indicator>
+<tl-notification *ngIf = "(tostrPayLoad && tostrPayLoad.level)"
+    [level]="tostrPayLoad.level"
+    [message]="tostrPayLoad.message"
+    (notifyResetToastPayload)="resetToastrPayload()">
+    </tl-notification>
 <div class="customerAction" *ngIf="mode==='view'">
     <tl-button [icon]="'fa fa-plus-circle'" (onClick)="openNewCustomerDialog()">
         <span btnlabel> New</span>
