@@ -9,6 +9,7 @@ import { FaqComponent } from './faq/faq.component';
 import { ProfilesContainerComponent } from './profiles/profiles-container/profiles-container.component';
 import { TrainingContainerComponent } from './trainings/training-container/training-container.component';
 import { CertificatesComponent } from './certificates/certificates.component';
+import { LoginGuard } from '../@core/guards/login.guard';
 
 const routes: Routes = [{
   path: '',
@@ -24,25 +25,30 @@ const routes: Routes = [{
     loadChildren: './training-library/training-library.module#TrainingLibraryModule'
   }, {
     path: 'howto',
-    component: HowToComponent
+    component: HowToComponent,
+    canActivate: [LoginGuard]
   }, {
     path: 'faq',
     component: FaqComponent
   }, {
     path: 'subscriptions',
-    loadChildren: './subscriptions/subscriptions.module#SubscriptionsModule'
+    loadChildren: './subscriptions/subscriptions.module#SubscriptionsModule',
+    canActivate: [LoginGuard]
   }, {
     path: 'profiles',
-    component: ProfilesContainerComponent
+    component: ProfilesContainerComponent,
+    canActivate: [LoginGuard]
   }, {
     path: 'trainings',
     component: TrainingContainerComponent,
+    canActivate: [LoginGuard]
   }, {
     path: 'userlist',
     loadChildren: './user-list/user-list.module#UserListModule'
   }, {
     path: 'certificates',
-    component: CertificatesComponent
+    component: CertificatesComponent,
+    canActivate: [LoginGuard]
   }, {
     path: '',
     redirectTo: 'welcome',

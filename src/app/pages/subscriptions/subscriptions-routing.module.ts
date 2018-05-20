@@ -4,19 +4,24 @@ import { SubscriptionContainerComponent } from './subscription-container/subscri
 import { PurchaseTrainingComponent } from './purchase-training/purchase-training.component';
 import { AllowedTrainingComponent } from './allowed-training/allowed-training.component';
 import { BudgetComponent } from './budget/budget.component';
+import { LoginGuard } from '../../@core/guards/login.guard';
 
 const routes: Routes = [{
   path: '',
   component: SubscriptionContainerComponent,
+  canActivate: [LoginGuard],
   children: [{
     path: 'purchase',
-    component: PurchaseTrainingComponent
+    component: PurchaseTrainingComponent,
+    canActivate: [LoginGuard]
   }, {
     path: 'allowedtraining',
-    component: AllowedTrainingComponent
+    component: AllowedTrainingComponent,
+    canActivate: [LoginGuard]
   }, {
     path: 'budget',
-    component: BudgetComponent
+    component: BudgetComponent,
+    canActivate: [LoginGuard]
   }, {
     path: '',
     redirectTo: 'purchase',

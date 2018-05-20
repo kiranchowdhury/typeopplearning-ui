@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpTokenInterceptor } from './@core/api-handlers/http.token.interceptor';
+import { LoginGuard } from './@core/guards/login.guard';
 
 @NgModule({
   declarations: [AppComponent, ],
@@ -30,6 +31,7 @@ import { HttpTokenInterceptor } from './@core/api-handlers/http.token.intercepto
   ],
   bootstrap: [AppComponent],
   providers: [
+    LoginGuard,
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
