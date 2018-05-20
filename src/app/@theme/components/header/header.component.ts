@@ -1,12 +1,16 @@
+import { LoginState } from './../../../@core/login/login.state';
+import { selectorLogin } from './../../../@core/login/login.reducer';
 import { Component, Input, OnInit } from '@angular/core';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { UserService } from '../../../@core/data/users.service';
+import { UserService } from '../../../@core/context/user.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../../@shared/modal/modal.component';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
+import { ActionSignOut } from '../../../@core/login/login.reducer';
+import { CurrentUser } from '../../../@core/context/user.model';
 
 @Component({
   selector: 'ngx-header',
@@ -15,7 +19,8 @@ import { AppState } from '../../../@models/app-state';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() authenticated: boolean = false;
+  authenticated: boolean = false;
+  currentUser: LoginState;
 
   @Input() position = 'normal';
 
@@ -25,15 +30,21 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
               private analyticsService: AnalyticsService,
               private modalService: NgbModal,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+            private userService: UserService) {
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
+    // this.currentUser = this.userService.getCurrentUser();
+    // this.authenticated = this.currentUser.authenticted;
+    this.store.select(selectorLogin).subscribe(
+      (loginState: LoginState) => {
+        this.authenticated = loginState.authenticated;
+        this.currentUser = loginState;
+      }
+    )
   }
 
   toggleSidebar(): boolean {
@@ -62,6 +73,6 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     console.log("Logging out");
-    this.store.dispatch(new ActionSignIn(this.form.value));
+    this.store.dispatch(new ActionSignOut());
   }
 }

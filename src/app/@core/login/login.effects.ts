@@ -5,7 +5,7 @@ import { SessionStorageService } from '../session-storage/session-storage.servic
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { LoginActionTypes, ActionSignIn, ActionSignInSuccess, ActionSignInFail } from './login.reducer';
+import { LoginActionTypes, ActionSignIn, ActionSignInSuccess, ActionSignInFail, ActionSignOut, ActionSignOutSuccess } from './login.reducer';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { LoginResponse } from './login.contract';
 import { LocalStorageService } from '../local-storage/local-storage.service';
@@ -47,8 +47,33 @@ export class LoginEffects {
         return this.actions$
             .ofType(LoginActionTypes.SIGN_IN_SUCCESS)
             .pipe(
-                tap((action) => this.userContext.loadLoginContext()),
+                tap((action) => this.userContext.loadUserContext()),
                 tap((action) => this.router.navigate(['/pages/customers']))
             )
     }
+
+
+    @Effect()
+    logout(): Observable<Action>{
+      return this.actions$
+        .ofType(LoginActionTypes.SIGN_OUT)
+        .pipe(
+          tap((action) => this.jwtService.removeToken()),
+          tap((action) => this.userContext.purgeCurrentContext()),
+          // tap((action) => this.router.navigate(['/pages/welcome']))
+          map((action) => new ActionSignOutSuccess())
+        )
+    }
+    @Effect({dispatch: false})
+    logoutSuccess(): Observable<Action>{
+      return this.actions$
+        .ofType(LoginActionTypes.SIGN_OUT_SUCCESS)
+        .pipe(
+          // tap((action) => this.jwtService.removeToken()),
+          // tap((action) => this.userContext.purgeCurrentContext()),
+          tap((action) => this.router.navigate(['/pages/welcome']))
+          // map((action) => new ActionSignOutSuccess())
+        )
+    }
+
 }

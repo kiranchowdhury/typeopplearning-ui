@@ -14,13 +14,18 @@
     <div class="loggedInUserDiv" >
         <a (click)=showLoggedInOption()>
             <i class="fa fa-user-circle-o" style="font-size:36px"></i>
-            <font> &nbsp;Admin&nbsp; </font>
+            <div>
+              <span> &nbsp;{{currentUser.name}} &nbsp; </span>
+              <font> &nbsp;{{currentUser.role | uppercase}} &nbsp; </font>
+
+            </div>
             <i class="fa fa-angle-down"></i>
+
         </a>
 
         <ul id="myDropdown" class="dropdown-content">
             <li><a href="/#/pages/profiles">Profile</a></li>
-            <li><a href="/#/pages/welcome">Logout</a></li>
+            <li><a (click)=logOut()>Logout</a></li>
         </ul>
     </div>
   </nb-action>

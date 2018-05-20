@@ -1,4 +1,5 @@
-import { Component, OnDestroy, Input } from '@angular/core';
+import { CurrentUser } from './../../../@core/context/user.model';
+import { Component, OnDestroy, Input, OnInit } from '@angular/core';
 import { delay, withLatestFrom } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import {
@@ -11,6 +12,7 @@ import {
 } from '@nebular/theme';
 
 import { StateService } from '../../../@core/data/state.service';
+import { UserService } from '../../../@core/context/user.service';
 
 // TODO: move layouts into the framework
 @Component({
@@ -19,14 +21,14 @@ import { StateService } from '../../../@core/data/state.service';
   template: `
   <nb-layout [center]="layout.id === 'center-column'" windowMode>
   <nb-layout-header fixed>
-    <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'" [authenticated]="authenticated"></ngx-header>
+    <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
   </nb-layout-header>
 
   <nb-sidebar *ngIf="authenticated" class="menu-sidebar"
                tag="menu-sidebar"
                responsive
                [end]="sidebar.id === 'end'">
-    
+
     <ng-content select="nb-menu"></ng-content>
   </nb-sidebar>
 
@@ -40,8 +42,9 @@ import { StateService } from '../../../@core/data/state.service';
 </nb-layout>
   `,
 })
-export class SampleLayoutComponent implements OnDestroy {
-  @Input() authenticated: boolean;
+export class SampleLayoutComponent implements OnInit, OnDestroy {
+  @Input()authenticated: boolean;
+
 
 
   layout: any = {};
@@ -56,7 +59,8 @@ export class SampleLayoutComponent implements OnDestroy {
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+              protected sidebarService: NbSidebarService,
+              protected userService: UserService) {
     this.layoutState$ = this.stateService.onLayoutState()
       .subscribe((layout: string) => this.layout = layout);
 
@@ -84,6 +88,17 @@ export class SampleLayoutComponent implements OnDestroy {
 
   getSideBarDisplay() {
     return this.authenticated? "block": "none";
+  }
+
+  ngOnInit() {
+    // this.authenticated = this.userService.getCurrentUser().authenticted;
+    // alert(this.authenticated);
+    // this.userService.currentUserSubject.subscribe(
+    //   (currentUser: CurrentUser) => {
+    //     this.authenticated = currentUser.authenticted;
+    //   }
+    // )
+
   }
 
   ngOnDestroy() {

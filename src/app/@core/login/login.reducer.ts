@@ -29,12 +29,12 @@ export class ActionSignInFail implements Action {
 
 export class ActionSignOut implements Action {
   readonly type = LoginActionTypes.SIGN_OUT;
-  constructor(public payload: LoginRequest) {}
+  constructor() {}
 }
 
 export class ActionSignOutSuccess implements Action {
   readonly type = LoginActionTypes.SIGN_OUT_SUCCESS;
-  constructor(public payload: LoginResponse) {}
+  constructor() {}
 }
 
 export class ActionSignOutFail implements Action {
@@ -84,37 +84,23 @@ export function loginReducer(
                 loading: false,
                 loadingMsg: ''
             }
+            case LoginActionTypes.SIGN_OUT:
+            return {
+                ...state,
+                loading: true,
+                loadingMsg: 'Signing out....',
+            }
+        case LoginActionTypes.SIGN_OUT_SUCCESS:
+            return {
+                ...state,
+                authenticated: false,
+                email: '',
+                name: '',
+                role: '',
+                loading: false,
+                loadingMsg: ''
+            }
         default:
             return state;
     }
-}
-
-export function logOutReducer(
-  state: LoginState = initialLoginState,
-  action: LoginActions
-): LoginState {
-  switch (action.type) {
-      case LoginActionTypes.SIGN_OUT:
-          return {
-              ...state,
-              loading: true,
-              loadingMsg: 'Signing out....',
-          }
-      case LoginActionTypes.SIGN_OUT_SUCCESS:
-          return {
-              ...state,
-              authenticated: false,
-              loading: false,
-              loadingMsg: ''
-          }
-      case LoginActionTypes.SIGN_OUT_FAIL:
-          return {
-              ...state,
-              error: action.payload,
-              loading: false,
-              loadingMsg: ''
-          }
-      default:
-          return state;
-  }
 }
