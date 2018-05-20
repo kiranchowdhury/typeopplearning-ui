@@ -10,7 +10,8 @@
   <tl-customer-item *ngFor="let cust of customers; let i = index" [customer]="cust" [i]="i"></tl-customer-item>
 </tbody>
 </table> -->
-<table class="table">
+
+<table class="table table-hover">
     <thead>
       <tr class="table-header">
         <th scope="col">Customer name</th>
@@ -20,7 +21,6 @@
     </thead>
     <tbody>
         <tr *ngFor="let customer of customers">
-            <!-- <tl-customer-item [customer]="customer"></tl-customer-item> -->
             <td *ngIf="mode==='view'">{{customer.name}}</td>
             <td *ngIf="mode==='view'">{{customer.contactName}}</td>
             <td *ngIf="mode==='view'">{{customer.noOfUsers}}</td>
@@ -28,6 +28,16 @@
             <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="customer.contactName" #contctnameedit></td>
             <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="customer.noOfUsers" #nouseredit></td>
         </tr>
-      <!-- <tl-customer-item *ngFor="let cust of customers" [customer]="cust"></tl-customer-item> -->
     </tbody>
   </table>
+  <!-- <ag-grid-angular style="width: 100%; height: 80%" class="ag-theme-blue"
+    [gridOptions]="gridoptions"
+    [columnDefs]="columnDefs"
+    [enableSorting]="true"
+    [enableFilter]="true"
+    [enableColResize]="true"
+    [pagination]="true"
+    [defaultColDef]="defaultColumnDef"
+    (gridReady)="onGridReady($event)"
+  ></ag-grid-angular> -->
+

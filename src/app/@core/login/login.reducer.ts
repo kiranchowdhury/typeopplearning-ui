@@ -71,6 +71,9 @@ export function loginReducer(
             return {
                 ...state,
                 authenticated: true,
+                email: action.payload.email,
+                name: action.payload.name,
+                role: action.payload.role,
                 loading: false,
                 loadingMsg: ''
             }

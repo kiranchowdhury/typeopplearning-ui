@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
 import { selectorCustomers, GetCustomerAction } from '../customers.reducer';
 import { CustomersState, Customer } from '../customers-state';
+import { GridOptions } from 'ag-grid';
 
 
 
@@ -14,7 +15,50 @@ import { CustomersState, Customer } from '../customers-state';
 export class CustomerlistComponent implements OnInit {
   customers: Customer[];
   @Input() mode: string;
-  constructor(private store: Store<AppState>) { }
+  @ViewChild('nameedit') nameElement: ElementRef;
+  gridApi;
+  gridColumnApi;
+  columnDefs;
+  defaultColumnDef;
+  gridoptions;
+
+  constructor(private store: Store<AppState>) { 
+    this.gridoptions = <GridOptions>{
+      rowHeight: 40,
+      headerHeight: 40
+    }
+    this.columnDefs = [{
+      headerName: "Customer Name",
+      width: 400,
+      field: 'name',
+    }, {
+      headerName: "Contact Name",
+      width: 400,
+      field: "contactName"
+    }, {
+      headerName: 'Users',
+      width: 200,
+      field: 'noOfUsers'
+    }];
+    this.defaultColumnDef = {
+      editable: true,
+      enableRowGroup: false,
+      enablePivot: false,
+      enableValue: true
+    };  
+  }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    this.store.select(selectorCustomers).subscribe(
+      (custState: CustomersState) => {
+        this.customers = custState.customers;
+        console.log("CUSTOMERS", this.customers);
+        params.api.setRowData(custState.customers);
+      }
+    )
+  }
 
   ngOnInit() {
     this.store.select(selectorCustomers).subscribe(
@@ -23,5 +67,9 @@ export class CustomerlistComponent implements OnInit {
         console.log("CUSTOMERS", this.customers);
       }
     )
+  }
+
+  trackChange() {
+    console.log('Name Element Ref', this.nameElement);
   }
 }
