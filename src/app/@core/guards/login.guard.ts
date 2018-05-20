@@ -16,7 +16,7 @@ export class LoginGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       this.store.select(selectorLogin).subscribe(
         (loginState: LoginState) => {
-          this.loggedin = loginState.loading;
+          this.loggedin = loginState.authenticated;
           if(!this.loggedin) {
             this.router.navigate(['/pages/welcome']);
           }
