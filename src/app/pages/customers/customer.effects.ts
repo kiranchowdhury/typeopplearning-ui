@@ -4,7 +4,7 @@ import { Actions, Effect } from "@ngrx/effects";
 import { CustomersService } from "./customers.service";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable'
-import { CustomersActionTypes, GetCustomerAction, GetCustomerSuccessAction, GetCustomerFailAction, CreateCustomerAction, CreateCustomerSuccessAction, CreateCustomerFailAction } from "./customers.reducer";
+import { CustomersActionTypes, GetCustomerAction, GetCustomerSuccessAction, GetCustomerFailAction, CreateCustomerAction, CreateCustomerSuccessAction, CreateCustomerFailAction, RemoveCustomerAction, RemoveCustomerSuccessAction, RemoveCustomerFailAction } from "./customers.reducer";
 import { switchMap, map, tap } from "rxjs/operators";
 import { GetCustomersResponse, CreateCustomerResponse } from "./customer-contracts";
 
@@ -38,12 +38,25 @@ export class CustomersEffects {
             switchMap((action: CreateCustomerAction) =>                
                 this.customerService.createCustomer(action.payload)
                 .pipe(
-                    tap((resp: CreateCustomerResponse) => console.log('In the effects payload---', action.payload)),
                     map((resp: CreateCustomerResponse) => (resp.status === 1)?
                     new CreateCustomerSuccessAction(resp)
                     : new CreateCustomerFailAction({code: resp.code, message: resp.message}))
                 ))
         )
+    }
+
+    @Effect()
+    removeCustomer(): Observable<Action> {
+        return this.action$.ofType(CustomersActionTypes.REMOVE_CUSTOMER).pipe(
+            //   tap(() => console.log('In the effects,')),
+               switchMap((action: RemoveCustomerAction) =>                
+                   this.customerService.removeCustomer(action.payload)
+                   .pipe(
+                       map((resp: CreateCustomerResponse) => (resp.status === 1)?
+                       new RemoveCustomerSuccessAction(resp)
+                       : new RemoveCustomerFailAction({code: resp.code, message: resp.message}))
+                   ))
+           )        
     }
 
 }

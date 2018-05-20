@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
 import { selectorCustomers, GetCustomerAction } from '../customers.reducer';
@@ -13,8 +13,10 @@ import { GridOptions } from 'ag-grid';
   styleUrls: ['./customerlist.component.scss']
 })
 export class CustomerlistComponent implements OnInit {
+  closeImg = require('../../../../assets/ic-close-edit-view.svg');
   customers: Customer[];
   @Input() mode: string;
+  @Output() removeCustomerEvent: EventEmitter<Customer> = new EventEmitter();
   @ViewChild('nameedit') nameElement: ElementRef;
   gridApi;
   gridColumnApi;
@@ -67,6 +69,10 @@ export class CustomerlistComponent implements OnInit {
         console.log("CUSTOMERS", this.customers);
       }
     )
+  }
+
+  onRemoveCustomer(customer: Customer) {
+    this.removeCustomerEvent.emit(customer);
   }
 
   trackChange() {

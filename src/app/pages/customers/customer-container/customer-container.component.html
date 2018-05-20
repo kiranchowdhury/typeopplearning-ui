@@ -17,5 +17,5 @@
     </tl-button>
 </div>
 <tl-customer-search *ngIf="!loading"></tl-customer-search>
-<tl-customerlist *ngIf="!loading" [mode]="mode"></tl-customerlist>
+<tl-customerlist *ngIf="!loading" [mode]="mode" (removeCustomerEvent)="handleRemoveCustomer($event)"></tl-customerlist>
 

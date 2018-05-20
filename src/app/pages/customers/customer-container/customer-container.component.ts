@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
-import { selectorCustomers, GetCustomerAction } from '../customers.reducer';
+import { selectorCustomers, GetCustomerAction, RemoveCustomerAction } from '../customers.reducer';
 import { CustomersState, Customer } from '../customers-state';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewCustomerComponent } from '../new-customer/new-customer.component';
+import { CreateCustomerRequest } from '../customer-contracts';
 
 @Component({
   selector: 'tl-customer-container',
@@ -39,6 +40,11 @@ export class CustomerContainerComponent implements OnInit {
 
   openNewCustomerDialog() {
     const activeModal = this.modalService.open(NewCustomerComponent, {});
+  }
+
+  handleRemoveCustomer(customer: CreateCustomerRequest) {
+    console.log("Removing customer", customer);
+    this.store.dispatch(new RemoveCustomerAction(customer))
   }
 
 }

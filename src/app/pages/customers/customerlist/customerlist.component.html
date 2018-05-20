@@ -17,6 +17,7 @@
         <th scope="col">Customer name</th>
         <th scope="col">Contact name</th>
         <th scope="col">Users</th>
+        <th *ngIf="mode==='edit'" scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +28,9 @@
             <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="customer.name" #nameedit></td>
             <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="customer.contactName" #contctnameedit></td>
             <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="customer.noOfUsers" #nouseredit></td>
+            <td *ngIf="mode==='edit'">
+                <a (click)="onRemoveCustomer(customer)"><i class="fa fa-times-circle ic_close_edit_view"></i></a>
+            </td>            
         </tr>
     </tbody>
   </table>

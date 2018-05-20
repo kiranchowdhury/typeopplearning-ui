@@ -58,7 +58,7 @@ exports.doPost = function(req, res) {
 */
 
 exports.getCustomers = function(req, res) {
-  console.log('Get Customers Api Called');
+ // console.log('Get Customers Api Called');
  var customers = createDummyCustomers();
   var resp = {
     status: 1,
@@ -71,7 +71,7 @@ exports.getCustomers = function(req, res) {
 }
 
 exports.createCustomer = function(req, res) {
-  console.log('Createting customer', req.body);
+  // console.log('Createting customer', req.body);
   var resp = {
     status: 1,
     code: 'OK',
@@ -81,9 +81,19 @@ exports.createCustomer = function(req, res) {
   res.send(resp);
   }
 
+  exports.removeCustomer = function(req, res) {
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      customer: req.body    
+    }
+    res.send(resp);
+  }
+
 
 exports.getAllTrainingLibrary = function(req, res) {
-  console.log('Get getAllTrainingLibrary Api Called');
+ // console.log('Get getAllTrainingLibrary Api Called');
   var trainingLibrary = createDummyTrainingLibrary();
   var resp = {
     status: 1,

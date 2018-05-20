@@ -10,11 +10,11 @@ export interface AppState {
         title: string;
         link: string;
         active: boolean;
-    }
+    };
     customers: {
         custState: CustomersState
-    }
+    };
     trainingLibrary : {
       trainingLibraryState : TrainingLibraryState
-    }
+    };
 }

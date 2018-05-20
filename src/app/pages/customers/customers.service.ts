@@ -23,4 +23,10 @@ export class CustomersService {
       map((resp: CreateCustomerResponse) => resp)
     )
   }
+
+  removeCustomer(payload: CreateCustomerRequest): Observable<CreateCustomerResponse> {
+    return this.apiConnector.post('/api/customers/delete', payload).pipe(
+      map((resp: CreateCustomerResponse) => resp)
+    )
+  }
 }
