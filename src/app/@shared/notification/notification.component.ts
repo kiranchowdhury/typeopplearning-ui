@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss']
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent implements OnInit, AfterViewInit {
 
   @Input() level: string;
   @Input() message: string;
@@ -14,6 +14,9 @@ export class NotificationComponent implements OnInit {
 
   constructor(private toastr: ToastrService) { }
 
+  ngAfterViewInit() {
+    
+  }
   ngOnInit() {
     // alert(this.level);
     if(this.level && this.level.length > 0 && this.message && this.message.length > 0) {

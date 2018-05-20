@@ -6,6 +6,7 @@ import { CustomersState, Customer } from '../customers-state';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewCustomerComponent } from '../new-customer/new-customer.component';
 import { CreateCustomerRequest } from '../customer-contracts';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'tl-customer-container',
@@ -22,11 +23,13 @@ export class CustomerContainerComponent implements OnInit {
   mode: string  = 'view';
   tostrPayLoad;
   constructor(private store: Store<AppState>,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.store.select(selectorCustomers).subscribe(
       (custState: CustomersState) => {
+        console.log('I AM CALLED');
         this.loading = custState.loading;
         this.loadingMsg = custState.loadingMsg;
         this.customers = custState.customers;
@@ -34,7 +37,11 @@ export class CustomerContainerComponent implements OnInit {
         this.code = custState.code;
         this.isError = custState.isError;
         // console.log("CUSTOMERS", this.customers);
-        this.createTostrPayload();
+        if(this.isError) {
+          this.toastr.error(this.code + ":" + this.apiMessage);
+        } else if(!this.loading && this.apiMessage && this.apiMessage.length > 0) {
+          this.toastr.success(this.apiMessage);
+        }
       }
     )
 
