@@ -11,5 +11,7 @@ export class FaqComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  cancelCreate(){
+    alert('Test Angular Material');
+  }
 }

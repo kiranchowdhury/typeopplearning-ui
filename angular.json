@@ -20,7 +20,7 @@
               "includePaths": [
                 "src/framework"
               ]
-            },            
+            },
             "assets": [
               "src/assets",
               "src/favicon.ico",

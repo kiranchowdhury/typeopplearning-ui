@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ModalComponent } from './modal/modal.component';
 import { TlDesignModule } from '../@tldesign/tl-design.module';
 import { NotificationComponent } from './notification/notification.component';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { NotificationComponent } from './notification/notification.component';
     BusyIndicatorComponent,
     ModalComponent,
     TlDesignModule,
-    NotificationComponent
+    NotificationComponent,
+    MaterialModule
   ],
   entryComponents: [ModalComponent]
 })

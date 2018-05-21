@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './customer-container.component.html',
   styleUrls: ['./customer-container.component.scss']
 })
+
 export class CustomerContainerComponent implements OnInit {
   loading: boolean = false;
   loadingMsg: string = '';
