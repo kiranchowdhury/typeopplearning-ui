@@ -17,14 +17,14 @@ export class TrainingLibContainerComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.store.select(selectorTrainingLibrary).subscribe(
-      (tlState: TrainingLibraryState) => {
-        this.loading = tlState.loading;
-        this.loadingMsg = tlState.loadingMsg;
-        this.trainingLibrary = tlState.trainingLibraries;
-        console.log("trainingLibrary", this.trainingLibrary);
-      }
-    )
+    // this.store.select(selectorTrainingLibrary).subscribe(
+    //   (tlState: TrainingLibraryState) => {
+    //     this.loading = tlState.loading;
+    //     this.loadingMsg = tlState.loadingMsg;
+    //     this.trainingLibrary = tlState.trainingLibraries;
+    //     console.log("trainingLibrary", this.trainingLibrary);
+    //   }
+    // )
 
     this.store.dispatch(new GetTrainingLibraryAction());
   }

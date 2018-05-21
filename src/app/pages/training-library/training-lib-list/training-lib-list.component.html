@@ -1,0 +1,22 @@
+<table class="table table-hover">
+    <thead>
+      <tr class="table-header">
+        <th scope="col">Equipment</th>
+        <th scope="col">Training Name</th>
+        <th scope="col">Date</th>
+        <th *ngIf="mode==='edit'" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let trainingLib of trainingLibraries">
+            <td *ngIf="mode==='view'">{{trainingLib.equipment}}</td>
+            <td *ngIf="mode==='view'">{{trainingLib.trainingName}}</td>
+            <td *ngIf="mode==='view'">{{trainingLib.date | date: 'MM/dd/yyyy'}}</td>
+            <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="trainingLib.equipment" #nameedit></td>
+            <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="trainingLib.trainingName" #contctnameedit></td>
+            <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="trainingLib.date | date: 'MM/dd/yyyy'" #nouseredit></td>
+            <td *ngIf="mode==='edit'">
+                <a (click)="onRemoveCustomer(customer)"><i class="fa fa-times-circle ic_close_edit_view"></i></a>
+            </td>
+        </tr>
+    </tbody>

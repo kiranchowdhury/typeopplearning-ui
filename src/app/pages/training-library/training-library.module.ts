@@ -10,6 +10,8 @@ import { TrainingLibContainerComponent } from './training-lib-container/training
 import { SharedModule } from '../../@shared/shared.module';
 import { trainingLibraryReducer } from './training-library-reducer';
 import { TrainingLibraryService } from './training-library-service';
+import { TrainingLibListComponent } from './training-lib-list/training-lib-list.component';
+import { TrainingLibSearchComponent } from './training-lib-search/training-lib-search.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,7 @@ import { TrainingLibraryService } from './training-library-service';
     }),
     EffectsModule.forFeature([TrainingLibraryEffects])
   ],
-  declarations: [TrainingLibContainerComponent],
+  declarations: [TrainingLibContainerComponent, TrainingLibListComponent, TrainingLibSearchComponent],
   providers: [TrainingLibraryService]
 })
 export class TrainingLibraryModule { }
