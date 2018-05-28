@@ -86,7 +86,7 @@ exports.createCustomer = function(req, res) {
       status: 1,
       code: 'OK',
       message: 'success',
-      customer: req.body    
+      customer: req.body
     }
     res.send(resp);
   }
@@ -101,6 +101,35 @@ exports.getAllTrainingLibrary = function(req, res) {
     message: 'success',
     trainingLibrary: trainingLibrary,
     count: trainingLibrary.length
+  }
+  res.send(resp);
+}
+
+exports.getAllCertificates = function(req, res) {
+  var certificateList = createDummyCertificates();
+  console.log('====creating certificate response==');
+  var resp = {
+    status: 1,
+    code: 'OK',
+    message: 'success',
+    certificates: certificateList,
+    count: certificateList.length
+  }
+
+  res.send(resp);
+}
+
+exports.getProfileDetails = function (req, res) {
+  console.log('creating profile details');
+  var resp = {
+    id: 1231,
+    fullName: 'Kiran Chowdhary',
+    profileImageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIJqWtCdNAfCdf3FhiqZ6ebvFw1bfCLYSTvIKwWDn0Yea58VnK',
+    email: 'kiran.soft@gmail.com',
+    phone: '77173267239',
+    address: 'G-145, Damlur',
+    specialCredits: 'XYZ',
+    status: 1
   }
   res.send(resp);
 }
@@ -133,4 +162,16 @@ createDummyTrainingLibrary = function(){
     })
   }
   return trainingLibrary;
+}
+
+createDummyCertificates = function() {
+  certificateList = [];
+  for(var i=0; i<50; i++) {
+    certificateList.push({
+      id: 'crid-'+i,
+      trainingName: 'Certificate for Training Name - '+i,
+      status: 'passed'
+    })
+  }
+  return certificateList;
 }
