@@ -1,3 +1,19 @@
-<p>
-  user-list-container works!
-</p>
+<ep-busy-indicator *ngIf="loading" [loadingMsg]="loadingMsg"></ep-busy-indicator>
+<div class="btn-right" *ngIf="mode==='view'">
+    <tl-button [icon]="'fa fa-plus-circle'">
+        <span btnlabel> New</span>
+    </tl-button>
+    <tl-button [icon]="'fa fa-edit'">
+        <span btnlabel> Edit</span>
+    </tl-button>
+</div>
+<div class="btn-right" *ngIf="mode==='edit'">
+    <tl-button [icon]="'fa fa-check-circle-o'">
+        <span btnlabel> Save</span>
+    </tl-button>
+    <tl-button [icon]="'fa fa-times-circle-o'">
+        <span btnlabel> Cancel</span>
+    </tl-button>
+</div>
+<tl-user-list-search></tl-user-list-search>
+<tl-user-list-table></tl-user-list-table>

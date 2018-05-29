@@ -8,6 +8,7 @@ import { InvoiceState } from '../pages/invoices/invoices-state';
 import { EquipmentCatState } from '../pages/training/training-state'
 
 
+import { UserListState } from "../pages/user-list/user-list-state"
 export interface AppState {
     login: LoginState;
     auth: AuthState;
@@ -34,5 +35,8 @@ export interface AppState {
     };
     profile : {
       profileState: ProfileState
-    }
+    };
+    userList : {
+      userListState: UserListState
+    };
 }

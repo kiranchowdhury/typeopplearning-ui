@@ -160,6 +160,19 @@ exports.getProfileDetails = function (req, res) {
   res.send(resp);
 }
 
+exports.getUserList = function (req, res) {
+  console.log('creating user list');
+  var userList = createDummyUserList();
+  var resp = {
+    status: 1,
+    code: 'OK',
+    message: 'success',
+    userList: userList,
+    count: userList.length
+  }
+  res.send(resp);
+}
+
 createDummyCustomers = function(){
   customers = [];
   for(var i=0; i<100; i++) {
@@ -200,6 +213,37 @@ createDummyCertificates = function() {
     })
   }
   return certificateList;
+}
+
+createDummyUserList = function() {
+  userList = [];
+  for( var i=0; i<50; i++) {
+    if(i%2 === 0){
+      userList.push({
+        fullName: 'Melisa Golubic',
+        noOfTrainings: 29+i,
+        status: 'waiting',
+        userId: 'MG-'+i
+      })
+    }
+    else if(i%3 === 0){
+      userList.push({
+        fullName: 'Melisa Golubic',
+        noOfTrainings: 29+i,
+        status: 'passed',
+        userId: 'MG-'+i
+      })
+    }
+    else {
+      userList.push({
+        fullName: 'Melisa Golubic',
+        noOfTrainings: 29+i,
+        status: 'in progress',
+        userId: 'MG-'+i
+      })
+    }
+  }
+  return userList;
 }
 
 createDummyInvoiceList = function(){

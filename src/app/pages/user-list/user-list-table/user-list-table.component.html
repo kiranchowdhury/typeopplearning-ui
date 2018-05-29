@@ -1,0 +1,15 @@
+<table class="table table-hover">
+  <thead>
+    <tr class="table-header">
+      <th scope="col">User Name</th>
+      <th scope="col">No. of Trainings</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let user of userList">
+           <td>{{user.fullName}}</td>
+          <td>{{user.noOfTrainings}}</td>
+          <td><tl-status-dot [status]="user.status"></tl-status-dot></td>
+      </tr>
+  </tbody>
