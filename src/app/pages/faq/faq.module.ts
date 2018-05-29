@@ -5,7 +5,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { FaqContainerComponent } from './faq-container/faq-container.component';
 import { FaqListComponent } from './faq-list/faq-list.component';
 import { FaqRoutingModule } from './faq-routing.module';
-import { SharedModule } from '../../@shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 
 @NgModule({
