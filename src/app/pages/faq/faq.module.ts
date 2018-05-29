@@ -1,13 +1,20 @@
 import { SharedModule } from './../../@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FaqComponent } from './faq.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { FaqContainerComponent } from './faq-container/faq-container.component';
+import { FaqListComponent } from './faq-list/faq-list.component';
+import { FaqRoutingModule } from './faq-routing.module';
+import { SharedModule } from '../../@shared/shared.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule
+    FaqRoutingModule,
+    SharedModule,
+    MatExpansionModule
   ],
-  declarations: [FaqComponent]
+  declarations: [FaqContainerComponent, FaqListComponent]
 })
 export class FaqModule { }

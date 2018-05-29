@@ -5,10 +5,12 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HowToComponent } from './howto/how-to/how-to.component';
-import { FaqComponent } from './faq/faq.component';
+import { FaqContainerComponent } from './faq/faq-container/faq-container.component';
 import { ProfilesContainerComponent } from './profiles/profiles-container/profiles-container.component';
-import { TrainingContainerComponent } from './trainings/training-container/training-container.component';
+import { TrainingContainerComponent } from './training/training-container/training-container.component';
+import { InvoiceContainerComponent } from './invoices/invoice-container/invoice-container.component'
 import { CertificatesComponent } from './certificates/certificates.component';
+
 import { LoginGuard } from '../@core/guards/login.guard';
 
 const routes: Routes = [{
@@ -19,7 +21,13 @@ const routes: Routes = [{
     component: WelcomeComponent,
   },  {
     path: 'customers',
-    loadChildren: './customers/customers.module#CustomersModule'
+    loadChildren: './customers/customers.module#CustomersModule',
+    data: {
+      // Uses static text (Home)
+      breadcrumbs: true,
+      text: 'Customers',
+      active: true,
+    }
   }, {
     path: 'traininglibs',
     loadChildren: './training-library/training-library.module#TrainingLibraryModule'
@@ -29,7 +37,8 @@ const routes: Routes = [{
     canActivate: [LoginGuard]
   }, {
     path: 'faq',
-    component: FaqComponent
+    component: FaqContainerComponent,
+    canActivate: [LoginGuard]
   }, {
     path: 'subscriptions',
     loadChildren: './subscriptions/subscriptions.module#SubscriptionsModule',
@@ -40,11 +49,23 @@ const routes: Routes = [{
     canActivate: [LoginGuard]
   }, {
     path: 'trainings',
-    component: TrainingContainerComponent,
+    loadChildren: './training/training.module#TrainingModule',
+    //component: TrainingContainerComponent,
+   data: {
+      // Uses static text (Home)
+      breadcrumbs: true,
+      text: 'Trainings',
+      active: true,
+    },
     canActivate: [LoginGuard]
   }, {
     path: 'userlist',
     loadChildren: './user-list/user-list.module#UserListModule'
+  }, {
+    path: 'invoices',
+    loadChildren: './invoices/invoices.module#InvoicesModule',
+    //component : InvoicesComponent,
+    canActivate : [LoginGuard]
   }, {
     path: 'certificates',
     component: CertificatesComponent,

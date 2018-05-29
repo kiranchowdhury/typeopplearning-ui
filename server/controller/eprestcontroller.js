@@ -105,6 +105,32 @@ exports.getAllTrainingLibrary = function(req, res) {
   res.send(resp);
 }
 
+exports.getInvoiceList = function(req, res) {
+  // console.log('Get getAllTrainingLibrary Api Called');
+   var invoiceList = createDummyInvoiceList();
+   var resp = {
+     status: 1,
+     code: 'OK',
+     message: 'success',
+     invoiceList: invoiceList,
+     count: invoiceList.length
+   }
+   res.send(resp);
+ }
+
+ exports.getTrainingEquipmentCategory = function(req, res) {
+  // console.log('Get getAllTrainingLibrary Api Called');
+   var equipmentCategory = createDummyEquipmentCategory();
+   var resp = {
+     status: 1,
+     code: 'OK',
+     message: 'success',
+     equipmentCat: equipmentCategory,
+     count: equipmentCategory.length
+   }
+   res.send(resp);
+ }
+
 exports.getAllCertificates = function(req, res) {
   var certificateList = createDummyCertificates();
   console.log('====creating certificate response==');
@@ -175,3 +201,58 @@ createDummyCertificates = function() {
   }
   return certificateList;
 }
+
+createDummyInvoiceList = function(){
+  let date = new Date();
+  invoiceList = [];
+  for(var i=0; i<100; i++) {
+    let status = 'paid';
+    if(i==0){
+      status = 'sent';
+    }else if(i==3){
+      status='draft'
+    }
+
+    invoiceList.push({
+      id: 'id' + i,
+      invoiceNumber: i,
+      invoiceDate: date ,
+      invoiceTotal: i*100+50,
+      dueDate : date,
+      
+      status : status
+    })
+  }
+  return invoiceList;
+}
+
+createDummyEquipmentCategory = function(){
+  equipmentCategories = [];
+  let date = new Date();
+  equipmentCategories.push({
+    id : '1',
+    trainingName : 'Building / Construction Equipment',
+    equipment : 'Equipment 01',
+    date : date
+  })
+  equipmentCategories.push({
+    id : '2',
+    trainingName : 'Transportation',
+    equipment : 'Equipment 02',
+    date : date
+  })
+  equipmentCategories.push({
+    id : '3',
+    trainingName : 'Agriculture',
+    equipment : 'Equipment 03',
+    date : date
+  })
+  equipmentCategories.push({
+    id : '4',
+    trainingName : 'Industry',
+    equipment : 'Equipment 04',
+    date : date
+  })
+  return equipmentCategories;
+}
+

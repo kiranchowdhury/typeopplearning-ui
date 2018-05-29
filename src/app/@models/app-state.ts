@@ -4,6 +4,10 @@ import { CustomersState } from '../pages/customers/customers-state';
 import { TrainingLibraryState } from '../pages/training-library/training-library-state';
 import { CertificateState } from "../pages/certificates/certificate-state";
 import { ProfileState } from "../pages/profiles/profile-state"
+import { InvoiceState } from '../pages/invoices/invoices-state';
+import { EquipmentCatState } from '../pages/training/training-state'
+
+
 export interface AppState {
     login: LoginState;
     auth: AuthState;
@@ -18,6 +22,13 @@ export interface AppState {
     trainingLibrary : {
       trainingLibraryState : TrainingLibraryState
     };
+    invoices : {
+        invoiceState : InvoiceState
+    };
+    equipmentCat: {
+        equipmentCatState : EquipmentCatState
+    };
+    
     certificate : {
       certificateState: CertificateState
     };

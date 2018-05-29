@@ -9,7 +9,9 @@ import { CertificatesModule } from './certificates/certificates.module';
 import { FaqModule } from './faq/faq.module';
 import { HowtoModule } from './howto/howto.module';
 import { ProfilesModule } from './profiles/profiles.module';
-import { TrainingsModule } from './trainings/trainings.module';
+import { TrainingModule } from './training/training.module';
+import { InvoicesModule } from './invoices/invoices.module';
+
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -25,11 +27,12 @@ const PAGES_COMPONENTS = [
     FaqModule,
     HowtoModule,
     ProfilesModule,
-    TrainingsModule,
-    
+    TrainingModule,
+    InvoicesModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+    
   ],
 })
 export class PagesModule {

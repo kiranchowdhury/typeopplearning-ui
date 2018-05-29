@@ -99,7 +99,9 @@ module.exports = function(app, config) {
   app.get('/api/customers/getall', restcontroller.getCustomers);
   app.get('/api/training-library/getall', restcontroller.getAllTrainingLibrary);
   app.post('/api/customers/create', restcontroller.createCustomer);
-  app.post('/api/customers/delete', restcontroller.createCustomer);
+  app.get('/api/invoice/list', restcontroller.getInvoiceList);
+  app.get('/api/training/equipment', restcontroller.getTrainingEquipmentCategory);
+  app.post('/api/post', restcontroller.doPost);
   app.get('/api/get', restcontroller.doGet);
   app.post('/api/post', restcontroller.doPost);
   app.get('/api/certificate/getall', restcontroller.getAllCertificates);

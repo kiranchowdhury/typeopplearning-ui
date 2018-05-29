@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HowToComponent implements OnInit {
 
+  loading: boolean = false;
+  loadingMsg: string = '';
   constructor() { }
 
   ngOnInit() {
