@@ -1,0 +1,34 @@
+
+<div class="title-area">
+  <div class="heading">
+    <span class="title-text">New User</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="createUser()">
+  <div class="content-area">
+    <div>
+        <input type="text" class="form-control" placeholder="Full Name" formControlName="fullName" required>
+    </div>
+    <div>
+        <input type="text"  class="form-control" placeholder="No of Trainings" formControlName="noOfTrainings" required>
+    </div>
+    <div>
+      <select class="select-status" formControlName="status" required>
+        <option [value]="'in progress'">In Progress</option>
+        <option [value]="'waiting'">Waiting</option>
+        <option [value]="'passed'">Passed</option>
+      </select>
+    </div>
+
+    <div class="button-area">
+        <button type="submit" class="tl-modal-button" (click)="createUser()">
+            <div class="btn-label">Create</div>
+        </button>
+    </div>
+  </div>
+  </form>
+

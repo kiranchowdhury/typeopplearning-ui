@@ -17,9 +17,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpTokenInterceptor } from './@core/api-handlers/http.token.interceptor';
 import { LoginGuard } from './@core/guards/login.guard';
 import { ToastrModule } from 'ngx-toastr';
+import { NewUserComponent } from './pages/user-list/new-user/new-user.component';
 
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent, NewUserComponent ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -31,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     CoreModule.forRoot(),
     ToastrModule.forRoot(),
   ],
+  entryComponents: [NewUserComponent],
   bootstrap: [AppComponent],
   providers: [
     LoginGuard,

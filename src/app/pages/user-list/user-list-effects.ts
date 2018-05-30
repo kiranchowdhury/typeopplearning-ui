@@ -1,4 +1,4 @@
-import { UserListContract } from './user-list-contract';
+import { UserListContract, CreateUserResponse } from './user-list-contract';
 import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
 import { Actions, Effect } from "@ngrx/effects";
@@ -6,7 +6,7 @@ import { UserListService } from "./user-list.service";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable'
 import { switchMap, map } from "rxjs/operators";
-import { UserListActionTypes, GetUserListAction, GetUserListActionSuccess, GetUserListActionFailed } from './user-list-reducer';
+import { UserListActionTypes, GetUserListAction, GetUserListActionSuccess, GetUserListActionFailed, CreateUserAction, CreateUserFailedAction, CreateUserSuccessAction } from './user-list-reducer';
 import { RouterEvent } from '@angular/router/src/events';
 
 @Injectable()
@@ -31,5 +31,18 @@ export class UserListEffects {
   )
     )
   }
+
+  @Effect()
+  createUser(): Observable<Action> {
+    return this.$action.ofType(UserListActionTypes.CREATE_USER).pipe(
+        switchMap((action: CreateUserAction) =>
+        this.userListService.createUser(action.payload)
+        .pipe(
+            map((resp: CreateUserResponse) => (resp.status === 1)?
+            new CreateUserSuccessAction(resp)
+            : new CreateUserFailedAction({code: resp.code, message: resp.message}))
+        ))
+      )
+    }
 
 }

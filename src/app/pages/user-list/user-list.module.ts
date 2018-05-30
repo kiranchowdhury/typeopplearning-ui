@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { userListReducer } from './user-list-reducer';
 import { UserListEffects } from './user-list-effects'
 import { EffectsModule } from '@ngrx/effects';
+import { NewUserComponent } from './new-user/new-user.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,6 @@ import { EffectsModule } from '@ngrx/effects';
     }),
     EffectsModule.forFeature([UserListEffects])
   ],
-  declarations: [UserListContainerComponent, UserListSearchComponent,
-        UserListTableComponent]
+  declarations: [UserListContainerComponent, UserListSearchComponent, UserListTableComponent]
 })
 export class UserListModule { }

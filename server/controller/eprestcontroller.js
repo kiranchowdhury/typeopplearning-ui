@@ -173,6 +173,17 @@ exports.getUserList = function (req, res) {
   res.send(resp);
 }
 
+exports.createUser = function(req, res) {
+  console.log('Creating user', req.body);
+  var resp = {
+    status: 1,
+    code: 'OK',
+    message: 'success',
+    user: req.body
+  }
+  res.send(resp);
+  }
+
 createDummyCustomers = function(){
   customers = [];
   for(var i=0; i<100; i++) {
@@ -263,7 +274,7 @@ createDummyInvoiceList = function(){
       invoiceDate: date ,
       invoiceTotal: i*100+50,
       dueDate : date,
-      
+
       status : status
     })
   }

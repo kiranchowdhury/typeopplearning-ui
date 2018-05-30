@@ -7,3 +7,14 @@ export interface UserListContract {
   count: number;
   userList: User[];
 }
+
+export interface CreateUser {
+  user: User;
+}
+
+export interface CreateUserResponse {
+  status: number;
+  code: string;
+  message: string;
+  user: User;
+}

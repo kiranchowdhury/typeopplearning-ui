@@ -107,7 +107,7 @@ module.exports = function(app, config) {
   app.get('/api/certificate/getall', restcontroller.getAllCertificates);
   app.get('/api/profile/details', restcontroller.getProfileDetails);
   app.get('/api/user/getall', restcontroller.getUserList);
-
+  app.post('/api/user/create', restcontroller.createUser);
 
 	// Catch all other routes and return the index file
 	// app.get('*', (req, res) => {

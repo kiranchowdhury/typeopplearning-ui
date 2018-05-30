@@ -8,8 +8,13 @@
   </thead>
   <tbody>
       <tr *ngFor="let user of userList">
-           <td>{{user.fullName}}</td>
-          <td>{{user.noOfTrainings}}</td>
-          <td><tl-status-dot [status]="user.status"></tl-status-dot></td>
+           <td *ngIf="mode==='view'">{{user.fullName}}</td>
+          <td *ngIf="mode==='view'">{{user.noOfTrainings}}</td>
+          <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="user.fullName" #nameedit></td>
+          <td *ngIf="mode==='edit'"><input class="form-control" type="text" [value]="user.noOfTrainings" #notrainingedit></td>
+          <td *ngIf="mode==='edit'">
+              <a (click)="onRemoveUser(user)"><i class="fa fa-times-circle ic_close_edit_view"></i></a>
+          </td>
+          <td *ngIf="mode==='view'"><tl-status-dot [status]="user.status"></tl-status-dot></td>
       </tr>
   </tbody>
