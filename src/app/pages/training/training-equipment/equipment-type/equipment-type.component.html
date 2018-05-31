@@ -1,0 +1,16 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb ol-list-style">
+    <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Library</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+    <li  *ngFor="let item of breadcrumbs" class="breadcrumb-item" [ngClass]="{'active': item.active}"> 
+        <a class="li-list-style" href="#" [routerLink]='item.link'>{{item.name }}</a> </li>
+  </ol>
+</nav>
+<div class="col-md-6 div-margin ">
+    <mat-chip-list>
+        <mat-chip class="equipment-cat-height"><p class="equipment-font-size"> <i class="fa fa-industry class-list-padding" ></i> {{ selectedEquipment}}</p></mat-chip>
+        
+      </mat-chip-list>
+</div>
+<tl-equipment-type-list></tl-equipment-type-list>

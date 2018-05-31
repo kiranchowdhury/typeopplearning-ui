@@ -12,12 +12,15 @@ import { TrainingState, Equipment } from '../training-state';
 })
 export class TrainingEquipmentComponent implements OnInit {
 
+  urlHash :string;
   @ViewChild('nameedit') nameElement: ElementRef;
   equipmentList: Equipment[];
   constructor(private store : Store<AppState>) { }
 
 
   ngOnInit() {
+    this.urlHash = window.location.hash;
+    console.log( this.urlHash);
     this.store.select(selectorTraining).subscribe(
       (trainingState: TrainingState) => {
         console.log(trainingState);

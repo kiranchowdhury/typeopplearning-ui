@@ -184,6 +184,25 @@ exports.createUser = function(req, res) {
   res.send(resp);
   }
 
+  exports.getEquipmentTypes = function (req, res) {
+  
+    var payload = req.query;
+    var equipmentCat = payload.equipmentCat;
+    //console.log(equipmentCat);
+    
+    var equipmentTypes = createDummyEquipmentType(equipmentCat);
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      equipmentType: equipmentTypes,
+      count: equipmentTypes.length
+    }
+     //console.log(resp);
+    res.send(resp);
+    
+  }
+
 createDummyCustomers = function(){
   customers = [];
   for(var i=0; i<100; i++) {
@@ -288,26 +307,42 @@ createDummyEquipmentCategory = function(){
     id : '1',
     name : 'Building / Construction Equipment',
     details : 'Equipment 01',
-    icon: 'fa fa-ambulance'
+    icon: 'fa fa-ambulance',
+    url : 'building-construction-equipment'
   })
   equipmentCategories.push({
     id : '2',
     name : 'Transportation',
     details : 'Equipment 02',
-    icon: 'fa fa-avianex'
+    icon: 'fa fa-taxi',
+    url : 'transportation'
   })
   equipmentCategories.push({
     id : '3',
     name : 'Agriculture',
     details : 'Equipment 03',
-    icon: 'fa fa-pagelines'
+    icon: 'fa fa-pagelines',
+    url : 'agriculture'
   })
   equipmentCategories.push({
     id : '4',
     name : 'Industry',
     details : 'Equipment 04',
-    icon: 'fa fa-industry'
+    icon: 'fa fa-industry',
+    url: 'industry'
   })
   return equipmentCategories;
+}
+
+createDummyEquipmentType = function(selectedEquipmentCat){
+  equipmentTypes = [];
+  for(var i=0;i<10;i++){
+    var id = 'equip-000'+i;
+    equipmentTypes.push({
+      id : id,
+      equipmentType: selectedEquipmentCat+' equiment type '+id
+    });
+  }
+  return equipmentTypes;
 }
 

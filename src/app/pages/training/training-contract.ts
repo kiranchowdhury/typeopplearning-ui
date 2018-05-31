@@ -1,4 +1,4 @@
-import { Equipment } from "./training-state";
+import { Equipment, EquipmentType } from "./training-state";
 
 export interface TrainingContract {
   status: number;
@@ -8,3 +8,14 @@ export interface TrainingContract {
   equipmentList: Equipment[];
 }
 
+export interface EquipmentTypeContract {
+  status: number;
+  code: string;
+  message: string;
+  count: number;
+  equipmentType: EquipmentType[];
+} 
+ 
+export interface EquipmentTypeRes {
+  equipmentCat : string;
+}
