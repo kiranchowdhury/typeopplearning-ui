@@ -5,7 +5,7 @@ import { TrainingLibraryState } from '../pages/training-library/training-library
 import { CertificateState } from "../pages/certificates/certificate-state";
 import { ProfileState } from "../pages/profiles/profile-state"
 import { InvoiceState } from '../pages/invoices/invoices-state';
-import { EquipmentCatState } from '../pages/training/training-state'
+import { TrainingState } from '../pages/training/training-state'
 
 
 import { UserListState } from "../pages/user-list/user-list-state"
@@ -23,13 +23,12 @@ export interface AppState {
     trainingLibrary : {
       trainingLibraryState : TrainingLibraryState
     };
+    training: {
+      trainingState: TrainingState
+    };
     invoices : {
         invoiceState : InvoiceState
     };
-    equipmentCat: {
-        equipmentCatState : EquipmentCatState
-    };
-    
     certificate : {
       certificateState: CertificateState
     };

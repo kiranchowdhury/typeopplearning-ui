@@ -1,9 +1,9 @@
-import { selectorEquipment } from './../training-reducer';
 import { AppState } from './../../../@models/app-state';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, ViewChild, EventEmitter, ElementRef } from '@angular/core';
-import { EquipmentCat, EquipmentCatState } from '../training-state';
 import { GridOptions } from 'ag-grid';
+import { selectorTraining } from '../training-reducer';
+import { TrainingState, Equipment } from '../training-state';
 
 @Component({
   selector: 'tl-training-equipment',
@@ -12,22 +12,18 @@ import { GridOptions } from 'ag-grid';
 })
 export class TrainingEquipmentComponent implements OnInit {
 
-  equipmentCat : EquipmentCat[];
   @ViewChild('nameedit') nameElement: ElementRef;
+  equipmentList: Equipment[];
   constructor(private store : Store<AppState>) { }
 
 
   ngOnInit() {
-
-    console.log("on initialise Equipment list", this.equipmentCat);
-    this.store.select(selectorEquipment).subscribe(
-      (equipmentState: EquipmentCatState) => {
-        console.log("Equipment state 111", equipmentState);
-        this.equipmentCat = equipmentState.equipmentCat;
-        console.log("Equipment list 111", this.equipmentCat);
+    this.store.select(selectorTraining).subscribe(
+      (trainingState: TrainingState) => {
+        console.log(trainingState);
+        this.equipmentList = trainingState.equipmentList;
       }
     )
-    console.log("Equipment list after", this.equipmentCat);
   }
 
 }

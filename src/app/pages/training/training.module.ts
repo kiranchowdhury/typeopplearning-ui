@@ -4,14 +4,12 @@ import { TrainingContainerComponent } from './training-container/training-contai
 import { TrainingEquipmentComponent } from './training-equipment/training-equipment.component';
 
 import { EffectsModule } from '@ngrx/effects';
-import { TrainingEffects} from './training-effects'
-import { EquipmentCat } from './training-state'
 import { StoreModule } from '@ngrx/store';
-import { equipmentListReducer} from './training-reducer';
-import { TrainingService } from './training-service';
 import { TrainingsRoutingModule } from './training-routing.module';
 import { SharedModule } from '../../@shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
+import { trainingReducer } from './training-reducer';
+import { TrainingEffects } from './training-effects'
 
 @NgModule({
   imports: [
@@ -19,12 +17,11 @@ import { MatCardModule } from '@angular/material/card';
     TrainingsRoutingModule,
     SharedModule,
     MatCardModule,
-    StoreModule.forFeature('equipmentCat',{
-      trainingState: equipmentListReducer
-  }),
-  EffectsModule.forFeature([TrainingEffects])
+    StoreModule.forFeature('training', {
+      trainingState: trainingReducer
+    }),
+    EffectsModule.forFeature([TrainingEffects])
   ],
-  declarations: [TrainingContainerComponent, TrainingEquipmentComponent],
-  providers: [TrainingService]
+  declarations: [TrainingContainerComponent, TrainingEquipmentComponent]
 })
 export class TrainingModule { }

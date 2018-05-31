@@ -1,9 +1,10 @@
-import { EquipmentCat } from './training-state'
+import { Equipment } from "./training-state";
 
-export interface EquipmentContract {
-    status: number;
-    code: string;
-    message: string;
-    count: number;
-    equipmentCat: EquipmentCat[];
-  }
+export interface TrainingContract {
+  status: number;
+  code: string;
+  message: string;
+  count: number;
+  equipmentList: Equipment[];
+}
+

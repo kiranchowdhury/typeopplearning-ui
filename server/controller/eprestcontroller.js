@@ -120,13 +120,13 @@ exports.getInvoiceList = function(req, res) {
 
  exports.getTrainingEquipmentCategory = function(req, res) {
   // console.log('Get getAllTrainingLibrary Api Called');
-   var equipmentCategory = createDummyEquipmentCategory();
+   var equipmentList = createDummyEquipmentCategory();
    var resp = {
      status: 1,
      code: 'OK',
      message: 'success',
-     equipmentCat: equipmentCategory,
-     count: equipmentCategory.length
+     equipmentList: equipmentList,
+     count: equipmentList.length
    }
    res.send(resp);
  }
@@ -286,27 +286,27 @@ createDummyEquipmentCategory = function(){
   let date = new Date();
   equipmentCategories.push({
     id : '1',
-    trainingName : 'Building / Construction Equipment',
-    equipment : 'Equipment 01',
-    date : date
+    name : 'Building / Construction Equipment',
+    details : 'Equipment 01',
+    icon: 'fa fa-ambulance'
   })
   equipmentCategories.push({
     id : '2',
-    trainingName : 'Transportation',
-    equipment : 'Equipment 02',
-    date : date
+    name : 'Transportation',
+    details : 'Equipment 02',
+    icon: 'fa fa-avianex'
   })
   equipmentCategories.push({
     id : '3',
-    trainingName : 'Agriculture',
-    equipment : 'Equipment 03',
-    date : date
+    name : 'Agriculture',
+    details : 'Equipment 03',
+    icon: 'fa fa-pagelines'
   })
   equipmentCategories.push({
     id : '4',
-    trainingName : 'Industry',
-    equipment : 'Equipment 04',
-    date : date
+    name : 'Industry',
+    details : 'Equipment 04',
+    icon: 'fa fa-industry'
   })
   return equipmentCategories;
 }

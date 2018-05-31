@@ -1,72 +1,77 @@
-import { EquipmentCatState } from './training-state';
-import { EquipmentContract } from './training-contract';
 import { Action } from "@ngrx/store";
+import { TrainingContract } from "./training-contract";
 import { ErrorResponse } from "../../@core/error/error-response";
+import { GetUserListAction } from "../user-list/user-list-reducer";
 import { AppState } from "../../@models/app-state";
+import { TrainingState } from "./training-state";
 
-export enum TrainingEquipmentActionTypes {
-    GET_EQUIPMENT_LIST = 'Get Equipment List',
-    GET_EQUIPMENT_LIST_SUCCESS = 'Get Equipment List Success',
-    GET_EQUIPMENT_LIST_FAIL = 'Get Equipment List Fail',
+export enum TrainingActionTypes {
+  GET_EQUIPMENT_LIST = "Get Equipment List",
+  GET_EQUIPMENT_LIST_SUCCESS = "Get Equipment List Success",
+  GET_EQUIPMENT_LIST_FAILED = "Get Equipment List Failed"
 }
 
 export class GetEquipmentListAction implements Action {
-    readonly type = TrainingEquipmentActionTypes.GET_EQUIPMENT_LIST;
-    constructor() {}
+  readonly type = TrainingActionTypes.GET_EQUIPMENT_LIST;
+  constructor() {}
 }
 
 export class GetEquipmentListSuccessAction implements Action {
-    readonly type = TrainingEquipmentActionTypes.GET_EQUIPMENT_LIST_SUCCESS;
-    constructor(public payload: EquipmentContract) {}
+  readonly type = TrainingActionTypes.GET_EQUIPMENT_LIST_SUCCESS;
+  constructor(public payload: TrainingContract) {}
 }
 
-export class GetEquipmentListFailAction implements Action {
-    readonly type = TrainingEquipmentActionTypes.GET_EQUIPMENT_LIST_FAIL;
-    constructor(public payload: ErrorResponse) {}
+export class GetEquipmentListFailedAction implements Action {
+  readonly type = TrainingActionTypes.GET_EQUIPMENT_LIST_FAILED;
+  constructor(public payload: ErrorResponse) {}
 }
 
-export type EquipmentListActions = GetEquipmentListAction | GetEquipmentListSuccessAction | GetEquipmentListFailAction
+export type TrainingActions = GetEquipmentListAction |
+                              GetEquipmentListSuccessAction |
+                              GetEquipmentListFailedAction
 
-export const initialEquipmentState: EquipmentCatState = {
-    loading: false,
-    loadingMsg: '',
-    equipmentCat: [],
-    count: 0,
-    currentPage: 1,
-
+export const initialTrainingState = {
+  errorCode: '',
+  errorMsg: '',
+  loading: true,
+  loadingMsg: 'Loading Equipments',
+  equipmentList : [],
+  count: 0,
+  currentPage: 1
 }
 
-export const selectorEquipment = (state: AppState) => state.equipmentCat.equipmentCatState || initialEquipmentState;
+export const selectorTraining = (state: AppState) => state.training.trainingState || initialTrainingState;
 
-export function equipmentListReducer(
-    state: EquipmentCatState = initialEquipmentState,
-    action: EquipmentListActions
-): EquipmentCatState {
-    switch (action.type) {
-        case TrainingEquipmentActionTypes.GET_EQUIPMENT_LIST:
-            return {
-                ...state,
-                loading: true,
-                loadingMsg: 'Retreiving training libraries...'
-            }
-        case TrainingEquipmentActionTypes.GET_EQUIPMENT_LIST_SUCCESS:
-        console.log('===========on success====');
-        console.log(action.payload);
-        console.log(action.payload.equipmentCat);
-            return {
-                ...state,
-                equipmentCat: action.payload.equipmentCat,
-                count: action.payload.equipmentCat.length,
-                loading: false,
-                loadingMsg: '',
-            }
-        case TrainingEquipmentActionTypes.GET_EQUIPMENT_LIST_FAIL:
-            return {
-                ...state,
-                errorCode: action.payload.code,
-                errorMsg: action.payload.message,
-            }
-        default:
-            return state;
+export function trainingReducer(
+  state: TrainingState = initialTrainingState,
+  action: TrainingActions
+): TrainingState {
+  switch(action.type){
+    case TrainingActionTypes.GET_EQUIPMENT_LIST :
+    return {
+      ...state,
+      loading: true,
+      loadingMsg: 'Loading Equipments'
     }
+    case TrainingActionTypes.GET_EQUIPMENT_LIST_SUCCESS :
+    return {
+      ...state,
+      loading: false,
+      loadingMsg: '',
+      equipmentList: action.payload.equipmentList,
+      count: action.payload.count
+    }
+    case TrainingActionTypes.GET_EQUIPMENT_LIST_FAILED :
+    return {
+      ...state,
+      loading: false,
+      loadingMsg: '',
+      errorCode: action.payload.code,
+      errorMsg: action.payload.message
+    }
+
+    default:
+    return state;
+
+  }
 }

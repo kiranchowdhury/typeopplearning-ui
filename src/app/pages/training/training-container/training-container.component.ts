@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './../../../@models/app-state'
-import { EquipmentCat, EquipmentCatState } from './../training-state';
-import { selectorEquipment, GetEquipmentListAction } from '../training-reducer';
+import { GetEquipmentListAction } from '../training-reducer';
 
 @Component({
   selector: 'tl-training-container',
@@ -22,7 +21,6 @@ export class TrainingContainerComponent implements OnInit {
   }]
   loading: boolean = false;
   loadingMsg: string = '';
-  equipmentCat: EquipmentCat[];
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
