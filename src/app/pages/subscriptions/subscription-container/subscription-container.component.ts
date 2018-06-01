@@ -1,15 +1,26 @@
+import { AppState } from './../../../@models/app-state';
+import { Store } from '@ngrx/store';
+import { TrainingCat, TrainingCatState } from './../subscriptions-state';
 import { Component, OnInit } from '@angular/core';
+import { selectorTrainingCat, GetTrainingCategoryAction } from '../subcriptions-reducer';
 
 @Component({
   selector: 'tl-subscription-container',
-  templateUrl: './subscription-container.component.html',
-  styleUrls: ['./subscription-container.component.scss']
+  template: `
+  <router-outlet></router-outlet>
+`,
 })
 export class SubscriptionContainerComponent implements OnInit {
 
-  constructor() { }
+  loading: boolean = false;
+  loadingMsg: string = '';
+  trainingCategory: TrainingCat[];
+  
+  constructor(private store: Store<AppState>) { }
+
 
   ngOnInit() {
+    this.store.dispatch(new GetTrainingCategoryAction());
   }
 
 }

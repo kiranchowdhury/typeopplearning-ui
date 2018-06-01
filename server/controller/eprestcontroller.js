@@ -208,8 +208,6 @@ exports.createUser = function(req, res) {
     var payload = req.query;
     var equipmentType = payload.equipmentType;
     var equimentId = payload.equipmentId;
-    //console.log(equipmentCat);
-    
     var equipmentList = createDummyEquipmentList(equipmentType);
     var resp = {
       status: 1,
@@ -378,4 +376,39 @@ createDummyEquipmentList= function(selectedEquipmentType){
   }
   return equipmentList;
 }
+
+createDummySubsTrnCategory = function(){
+  equipmentCategories = [];
+  let date = new Date();
+  equipmentCategories.push({
+    id : '1',
+    trainingName : 'Building / Construction Equipment',
+    equipment : 'Equipment 01',
+    icon: 'fa fa-ambulance',
+    url : 'building-construction-equipment'
+  })
+  equipmentCategories.push({
+    id : '2',
+    trainingName : 'Transportation',
+    equipment : 'Equipment 02',
+    icon: 'fa fa-taxi',
+    url : 'transportation'
+  })
+  equipmentCategories.push({
+    id : '3',
+    trainingName : 'Agriculture',
+    equipment : 'Equipment 03',
+    icon: 'fa fa-pagelines',
+    url : 'agriculture'
+  })
+  equipmentCategories.push({
+    id : '4',
+    trainingName : 'Industry',
+    equipment : 'Equipment 04',
+    icon: 'fa fa-industry',
+    url: 'industry'
+  })
+  return equipmentCategories;
+}
+
 

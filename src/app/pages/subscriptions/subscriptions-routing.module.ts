@@ -5,6 +5,7 @@ import { PurchaseTrainingComponent } from './purchase-training/purchase-training
 import { AllowedTrainingComponent } from './allowed-training/allowed-training.component';
 import { BudgetComponent } from './budget/budget.component';
 import { LoginGuard } from '../../@core/guards/login.guard';
+import { PurchaseEquipmentTypeComponent} from './purchase-training/purchase-equipment-type/purchase-equipment-type.component'
 
 const routes: Routes = [{
   path: '',
@@ -13,8 +14,17 @@ const routes: Routes = [{
   children: [{
     path: 'purchase',
     component: PurchaseTrainingComponent,
+    canActivate: [LoginGuard],
+     /*  children: [{
+        path: ':id', 
+        component: PurchaseEquipmentTypeComponent,
+        canActivate: [LoginGuard],
+      }] */
+  },  {
+    path: 'purchase/:id',
+    component: PurchaseEquipmentTypeComponent,
     canActivate: [LoginGuard]
-  }, {
+  },{
     path: 'allowedtraining',
     component: AllowedTrainingComponent,
     canActivate: [LoginGuard]

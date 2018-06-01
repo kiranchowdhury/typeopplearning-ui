@@ -8,18 +8,4 @@
     </ol>
   </nav>
   <tl-search-training></tl-search-training>
-  <div class="div-top-margin">
-    <p>Choose an equipment category:</p>
-  </div>
-  
-  <div class="row" *ngFor="let equip of trainingCategory">
-    <div class="col-md-6">
-        <mat-card class="card-list-style"> 
-            <i class="{{equip.icon}} class-list-padding" ></i> 
-            <a class="anchor-text-style" href="{{urlHash}}/{{equip.url}}"> {{equip.trainingName}} </a>
-            <i class="fa fa-angle-right class-align-right"></i>
-          </mat-card>
-    </div>
-    <div class="col-md-6"></div>
-    
-  </div>
+<tl-purchase-equipment-list></tl-purchase-equipment-list>

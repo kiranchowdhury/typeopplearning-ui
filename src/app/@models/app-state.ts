@@ -6,7 +6,7 @@ import { CertificateState } from "../pages/certificates/certificate-state";
 import { ProfileState } from "../pages/profiles/profile-state"
 import { InvoiceState } from '../pages/invoices/invoices-state';
 import { TrainingState } from '../pages/training/training-state'
-
+import { TrainingCatState } from './../pages/subscriptions/subscriptions-state';
 
 import { UserListState } from "../pages/user-list/user-list-state"
 export interface AppState {
@@ -37,5 +37,8 @@ export interface AppState {
     };
     userList : {
       userListState: UserListState
+    };
+    trainingCat : {
+      trainingCatState: TrainingCatState
     };
 }
