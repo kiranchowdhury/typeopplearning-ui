@@ -91,7 +91,6 @@ exports.createCustomer = function(req, res) {
     res.send(resp);
   }
 
-
 exports.getAllTrainingLibrary = function(req, res) {
  // console.log('Get getAllTrainingLibrary Api Called');
   var trainingLibrary = createDummyTrainingLibrary();
@@ -184,12 +183,23 @@ exports.createUser = function(req, res) {
   res.send(resp);
   }
 
+  exports.removeUser = function(req, res) {
+    console.log('Removing User', req);
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      user: req.body.user
+    }
+    res.send(resp);
+  }
+
   exports.getEquipmentTypes = function (req, res) {
-  
+
     var payload = req.query;
     var equipmentCat = payload.equipmentCat;
     //console.log(equipmentCat);
-    
+
     var equipmentTypes = createDummyEquipmentType(equipmentCat);
     var resp = {
       status: 1,
@@ -200,7 +210,7 @@ exports.createUser = function(req, res) {
     }
      //console.log(resp);
     res.send(resp);
-    
+
   }
 
   exports.getEquipmentList = function (req, res) {

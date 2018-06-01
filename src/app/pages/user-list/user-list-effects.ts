@@ -1,4 +1,4 @@
-import { UserListContract, CreateUserResponse } from './user-list-contract';
+import { UserListContract, CreateUserResponse, RemoveUserResponse } from './user-list-contract';
 import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
 import { Actions, Effect } from "@ngrx/effects";
@@ -6,7 +6,7 @@ import { UserListService } from "./user-list.service";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable'
 import { switchMap, map } from "rxjs/operators";
-import { UserListActionTypes, GetUserListAction, GetUserListActionSuccess, GetUserListActionFailed, CreateUserAction, CreateUserFailedAction, CreateUserSuccessAction } from './user-list-reducer';
+import { UserListActionTypes, GetUserListAction, GetUserListActionSuccess, GetUserListActionFailed, CreateUserAction, CreateUserFailedAction, CreateUserSuccessAction, RemoveUserAction, RemoveUserSuccessAction, RemoveUserFailedAction } from './user-list-reducer';
 import { RouterEvent } from '@angular/router/src/events';
 
 @Injectable()
@@ -42,6 +42,17 @@ export class UserListEffects {
             new CreateUserSuccessAction(resp)
             : new CreateUserFailedAction({code: resp.code, message: resp.message}))
         ))
+      )
+    }
+
+    @Effect()
+    removeUser(): Observable<Action> {
+      return this.$action.ofType(UserListActionTypes.REMOVE_USER).pipe(
+        switchMap((action: RemoveUserAction) =>
+      this.userListService.removeUser(action.payload).pipe(
+        map((response: RemoveUserResponse) => (response.status === 1)? new RemoveUserSuccessAction(response)
+      : new RemoveUserFailedAction({code: response.code, message: response.message}))
+      ))
       )
     }
 
