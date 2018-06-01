@@ -4,7 +4,8 @@ export interface TrainingState {
   loading?: boolean;
   loadingMsg?: string;
   equipmentList? : Equipment[];
-  equipmentType?: EquipmentType[];
+  equipmentType? : EquipmentType[];
+  equipmentData? : EquipmentData[];
   count: number;
   currentPage: number;
 }
@@ -20,4 +21,10 @@ export interface Equipment {
 export interface EquipmentType{
   id: string;
   equipmentType: string;
+}
+
+export interface EquipmentData{
+  id: string;
+  equipmentName: string;
+  url: string;
 }

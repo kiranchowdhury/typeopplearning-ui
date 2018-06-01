@@ -24,7 +24,7 @@ export class TrainingContainerComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    console.log('===========on dispatch');
+    //console.log('===========on dispatch');
     this.store.dispatch(new GetEquipmentListAction());
   }
 

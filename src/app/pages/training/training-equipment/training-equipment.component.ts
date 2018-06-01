@@ -20,10 +20,10 @@ export class TrainingEquipmentComponent implements OnInit {
 
   ngOnInit() {
     this.urlHash = window.location.hash;
-    console.log( this.urlHash);
+    //console.log( this.urlHash);
     this.store.select(selectorTraining).subscribe(
       (trainingState: TrainingState) => {
-        console.log(trainingState);
+        //console.log(trainingState);
         this.equipmentList = trainingState.equipmentList;
       }
     )

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppState } from './../../../../@models/app-state';
 import { Store } from '@ngrx/store';
-import { FormGroup, FormControl } from '@angular/forms';3
+import { FormGroup, FormControl } from '@angular/forms';
 import { GetEquipmentTypeListAction} from './../../training-reducer';
 
 
@@ -46,7 +46,7 @@ export class EquipmentTypeComponent implements OnInit {
     });
     
     //console.log('=====form value======on equipment type dispatch');
-    console.log('on dispatch=======');
+    //console.log('on dispatch=======');
     this.store.dispatch(new GetEquipmentTypeListAction(this.form.value));
   }
 

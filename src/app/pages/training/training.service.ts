@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiConnectorService } from '../../@core/api-handlers/api-connector.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { TrainingContract , EquipmentTypeRes, EquipmentTypeContract} from './training-contract';
+import { TrainingContract , EquipmentTypeRes, EquipmentTypeContract, 
+  EquipmentTypeIdRequest, EquipmentDataContract} from './training-contract';
 import { map } from 'rxjs/internal/operators';
 
 @Injectable({
@@ -18,10 +19,18 @@ export class TrainingService {
   }
 
   getEquipmentTypesList(payload: EquipmentTypeRes): Observable<EquipmentTypeContract> {
-    console.log('==========in equipment Type service========');
+    //console.log('==========in equipment Type service========');
     return this.apiConnector.get('/api/training/equipment/type', payload).pipe(
       map((resp: EquipmentTypeContract) => resp)
     )
   }
+
+  getEquipmentListOnType(payload: EquipmentTypeIdRequest): Observable<EquipmentDataContract> {
+    //console.log('==========in equipment Type List service========');
+    return this.apiConnector.get('/api/training/equipment/list', payload).pipe(
+      map((resp: EquipmentDataContract) => resp)
+    )
+  }
+
 
 }

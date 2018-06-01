@@ -2,31 +2,29 @@
   <div class="col-md-12 equipment-type-margin"><p class="p-padding"><b> Type of Equipment </b></p></div>
   <div class="col-md-12 equipment-type-list-margin">
 
-      <mat-expansion-panel class="listShadow">
-          <mat-expansion-panel-header>
-            
-            Articulated Truck   
+      <mat-expansion-panel class="listShadow" *ngFor="let equipType of equipmentType" 
+      (opened)=" getEquipData(equipType)">  
+          <mat-expansion-panel-header > 
+    
+            {{equipType.equipmentType}}  
           </mat-expansion-panel-header>
           <ul class="ul-islt-type">
-            <li class="li-border-top">
-                <label class="label-text">This is one</label>
+            <li class="li-border-top" *ngFor="let equip of equipmentData" >
+                <div class="row">
+                    <div class="col-md-8"><label class="label-text">{{equip.equipmentName}}</label></div>
+                    <div class="col-md-4">
+                            <tl-button [icon]="'fa fa-play-circle-o'" (click)="getStartTraining(equip)" class="label-button" >
+                                    <span btnlabel> Start</span>
+                                </tl-button>
+                    </div>
+                </div>
+               <!--  <label class="label-text">{{equip.equipmentName}}</label>
                 <tl-button [icon]="'fa fa-play-circle-o'" class="label-button" >
                         <span btnlabel> Start</span>
-                    </tl-button>
+                    </tl-button> -->
 
             </li>
-            <li class="li-border-top">
-                <label class="label-text">This is two</label>
-                <tl-button [icon]="'fa fa-play-circle-o'" class="label-button">
-                        <span btnlabel> Start</span>
-                    </tl-button>
-            </li>
-            <li class="li-border-top">
-                <label class="label-text">This is three</label>
-                <tl-button [icon]="'fa fa-play-circle-o'" class="label-button">
-                        <span btnlabel> Start</span>
-                    </tl-button>
-            </li>
+            
         </ul>
           </mat-expansion-panel>
 

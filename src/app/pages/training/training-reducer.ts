@@ -1,7 +1,8 @@
 import { Action } from "@ngrx/store";
-import { TrainingContract, EquipmentTypeRes, EquipmentTypeContract } from "./training-contract";
+import { TrainingContract, EquipmentTypeRes, EquipmentTypeContract,
+  EquipmentTypeIdRequest, EquipmentDataContract } from "./training-contract";
 import { ErrorResponse } from "../../@core/error/error-response";
-import { GetUserListAction } from "../user-list/user-list-reducer";
+//import { GetUserListAction } from "../user-list/user-list-reducer";
 import { AppState } from "../../@models/app-state";
 import { TrainingState } from "./training-state";
 
@@ -9,9 +10,15 @@ export enum TrainingActionTypes {
   GET_EQUIPMENT_LIST = "Get Equipment List",
   GET_EQUIPMENT_LIST_SUCCESS = "Get Equipment List Success",
   GET_EQUIPMENT_LIST_FAILED = "Get Equipment List Failed",
+
   GET_EQUIPMENT_TYPE_LIST = 'Get Equipment Type List',
   GET_EQUIPMENT_TYPE_LIST_SUCCESS = 'Get Equipment Type List Success',
   GET_EQUIPMENT_TYPE_LIST_FAIL = 'Get Equipment Type List Fail',
+
+  GET_EQUIPMENT_TYPE_DATA_LIST = 'Get Equipment Type Data List',
+  GET_EQUIPMENT_TYPE_DATA_LIST_SUCCESS = 'Get Equipment Type Data List Success',
+  GET_EQUIPMENT_TYPE_DATA_LIST_FAIL = 'Get Equipment Type Data List Fail',
+
 }
 
 export class GetEquipmentListAction implements Action {
@@ -43,12 +50,31 @@ export class GetEquipmentTypeListFailAction implements Action {
   constructor(public payload: ErrorResponse) {}
 }
 
+export class GetEquipmentTypeDataListAction implements Action {
+  readonly type = TrainingActionTypes.GET_EQUIPMENT_TYPE_DATA_LIST;
+  constructor(public payload: EquipmentTypeIdRequest) {}
+}
+
+export class GetEquipmentTypeDataListSuccessAction implements Action {
+  readonly type = TrainingActionTypes.GET_EQUIPMENT_TYPE_DATA_LIST_SUCCESS;
+  constructor(public payload: EquipmentDataContract) {}
+}
+
+export class GetEquipmentTypeDataListFailAction implements Action {
+  readonly type = TrainingActionTypes.GET_EQUIPMENT_TYPE_DATA_LIST_FAIL;
+  constructor(public payload: ErrorResponse) {}
+}
+
 
 export type TrainingActions = GetEquipmentListAction |
                               GetEquipmentListSuccessAction |
                               GetEquipmentListFailedAction | 
                               GetEquipmentTypeListAction | 
-                              GetEquipmentTypeListSuccessAction | GetEquipmentTypeListFailAction
+                              GetEquipmentTypeListSuccessAction | 
+                              GetEquipmentTypeListFailAction |
+                              GetEquipmentTypeDataListAction |
+                              GetEquipmentTypeDataListSuccessAction |
+                              GetEquipmentTypeDataListFailAction
 
 export const initialTrainingState = {
   errorCode: '',
@@ -71,7 +97,7 @@ export function trainingReducer(
     return {
       ...state,
       loading: true,
-      loadingMsg: 'Loading Equipments'
+      loadingMsg: 'Loading Equipments Category'
     }
     case TrainingActionTypes.GET_EQUIPMENT_LIST_SUCCESS :
     return {
@@ -91,17 +117,14 @@ export function trainingReducer(
     }
 
     case TrainingActionTypes.GET_EQUIPMENT_TYPE_LIST:
-    console.log('=========11==on retreiving====');
+    //console.log('=========11==on retreiving====');
         return {
             ...state,
             loading: true,
             loadingMsg: 'Retreiving equipment types...'
         }
     case TrainingActionTypes.GET_EQUIPMENT_TYPE_LIST_SUCCESS:
-    console.log('===========on equipment type success====');
-    console.log(action.payload);
-    console.log(action.payload.equipmentType);
-        return {
+      return {
             ...state,
             equipmentType: action.payload.equipmentType,
             count: action.payload.equipmentType.length,
@@ -114,6 +137,30 @@ export function trainingReducer(
             errorCode: action.payload.code,
             errorMsg: action.payload.message,
         }
+
+    //Get Equipment Data list on Equipment Type Id
+    case TrainingActionTypes.GET_EQUIPMENT_TYPE_DATA_LIST:
+        return {
+            ...state,
+            loading: true,
+            loadingMsg: 'Retreiving equipment Data list types...'
+        }
+    case TrainingActionTypes.GET_EQUIPMENT_TYPE_DATA_LIST_SUCCESS:
+    
+        return {
+            ...state,
+            equipmentData: action.payload.equipmentData,
+            count: action.payload.equipmentData.length,
+            loading: false,
+            loadingMsg: '',
+        }
+    case TrainingActionTypes.GET_EQUIPMENT_TYPE_LIST_FAIL:
+        return {
+            ...state,
+            errorCode: action.payload.code,
+            errorMsg: action.payload.message,
+        }
+    
 
     default:
     return state;

@@ -203,6 +203,26 @@ exports.createUser = function(req, res) {
     
   }
 
+  exports.getEquipmentList = function (req, res) {
+  
+    var payload = req.query;
+    var equipmentType = payload.equipmentType;
+    var equimentId = payload.equipmentId;
+    //console.log(equipmentCat);
+    
+    var equipmentList = createDummyEquipmentList(equipmentType);
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      equipmentData: equipmentList,
+      count: equipmentList.length
+    }
+     //console.log(resp);
+    res.send(resp);
+    
+  }
+
 createDummyCustomers = function(){
   customers = [];
   for(var i=0; i<100; i++) {
@@ -344,5 +364,18 @@ createDummyEquipmentType = function(selectedEquipmentCat){
     });
   }
   return equipmentTypes;
+}
+
+createDummyEquipmentList= function(selectedEquipmentType){
+  equipmentList = [];
+  for(var i=0;i<3;i++){
+    var id = 'equipment-000'+i;
+    equipmentList.push({
+      id : id,
+      equipmentName: selectedEquipmentType+', no: '+id,
+      url: id
+    });
+  }
+  return equipmentList;
 }
 
