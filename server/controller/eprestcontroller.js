@@ -220,6 +220,18 @@ exports.createUser = function(req, res) {
     res.send(resp);
     
   }
+  exports.getSubscriptionTrainingCat = function(req, res){
+    
+    var equipmentCategory = createDummySubsTrnCategory();
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      equipmentCat: equipmentCategory,
+      count: equipmentCategory.length
+    }
+    res.send(resp);
+  }
 
 createDummyCustomers = function(){
   customers = [];
