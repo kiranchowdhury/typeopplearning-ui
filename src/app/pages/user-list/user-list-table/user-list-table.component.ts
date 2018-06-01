@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../user-list-state';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
-import { selectorUserList } from '../user-list-reducer';
+import { selectorUserList, RemoveUserAction } from '../user-list-reducer';
 import { UserListState } from '../user-list-state';
 import { NewUserComponent } from '../new-user/new-user.component';
 
@@ -32,7 +32,8 @@ export class UserListTableComponent implements OnInit {
 
   onRemoveUser = (user: User) => {
     console.log('from list table ', user);
-    this.removeUserEvent.emit(user);
+    this.store.dispatch(new RemoveUserAction({user: user}));
+    // this.removeUserEvent.emit(user);
   }
 
 }

@@ -18,3 +18,14 @@ export interface CreateUserResponse {
   message: string;
   user: User;
 }
+
+export interface RemoveUser {
+  user: User;
+}
+
+export interface RemoveUserResponse {
+  status: number;
+  code: string;
+  message: string;
+  user: User;
+}

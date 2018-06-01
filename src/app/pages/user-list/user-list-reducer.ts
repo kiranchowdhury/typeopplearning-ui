@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
-import { UserListContract, CreateUser, CreateUserResponse } from "./user-list-contract"
+import { UserListContract, CreateUser, CreateUserResponse, RemoveUser, RemoveUserResponse } from "./user-list-contract"
 import { ErrorResponse } from "../../@core/error/error-response";
-import { UserListState } from "./user-list-state";
+import { UserListState, User } from "./user-list-state";
 import { AppState } from "../../@models/app-state";
 
 export enum UserListActionTypes {
@@ -11,7 +11,11 @@ export enum UserListActionTypes {
 
   CREATE_USER = "Create User",
   CREATE_USER_SUCCESS = "Create User Success",
-  CREATE_USER_FAILED = "Create User Failed"
+  CREATE_USER_FAILED = "Create User Failed",
+
+  REMOVE_USER = "Remove User",
+  REMOVE_USER_SUCCESS = "Remove User Success",
+  REMOVE_USER_FAILED = "Remove User Failed"
 
 }
 
@@ -45,12 +49,32 @@ export class CreateUserFailedAction implements Action {
   constructor (public payload: ErrorResponse) {};
 }
 
+export class RemoveUserAction implements Action {
+  readonly type = UserListActionTypes.REMOVE_USER;
+  constructor (public payload: RemoveUser) {}
+}
+
+export class RemoveUserSuccessAction implements Action {
+  readonly type = UserListActionTypes.REMOVE_USER_SUCCESS;
+  constructor (public payload: RemoveUserResponse) {}
+}
+
+export class RemoveUserFailedAction implements Action {
+  readonly type = UserListActionTypes.REMOVE_USER_FAILED;
+  constructor (public payload: ErrorResponse) {}
+}
+
+
+
 export type UserListActions = GetUserListAction |
                               GetUserListActionSuccess |
                               GetUserListActionFailed |
                               CreateUserAction |
                               CreateUserSuccessAction |
-                              CreateUserFailedAction
+                              CreateUserFailedAction |
+                              RemoveUserAction |
+                              RemoveUserSuccessAction |
+                              RemoveUserFailedAction
 
 export const initialUserListState: UserListState = {
   errorCode: '',
@@ -112,6 +136,32 @@ export function userListReducer (
       errorCode: action.payload.code,
       loading: false,
       loadingMsg: action.payload.message
+    }
+    case UserListActionTypes.REMOVE_USER :
+    console.log('---remove-user---action');
+    return {
+      ...state,
+      loading: true,
+      loadingMsg: 'Removing User'
+    }
+    case UserListActionTypes.REMOVE_USER_SUCCESS :
+    console.log('---remove-user---success action', action.payload.user);
+    let newList: User[] =  state.userList.filter((user) => {
+      return user.userId !== action.payload.user.userId
+    });
+    return {
+      ...state,
+      loading: false,
+      loadingMsg: 'User Removed Successfully',
+      userList: newList
+    }
+    case UserListActionTypes.REMOVE_USER_FAILED :
+    console.log('---remove-user---failed action');
+    return {
+      ...state,
+      loading: false,
+      errorCode: action.payload.code,
+      errorMsg: action.payload.message
     }
     default :
     return state;

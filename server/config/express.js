@@ -108,6 +108,7 @@ module.exports = function(app, config) {
   app.get('/api/profile/details', restcontroller.getProfileDetails);
   app.get('/api/user/getall', restcontroller.getUserList);
   app.post('/api/user/create', restcontroller.createUser);
+  app.post('/api/user/remove', restcontroller.removeUser);
   app.get('/api/training/equipment/type', restcontroller.getEquipmentTypes);
   app.get('/api/training/equipment/list', restcontroller.getEquipmentList);
   app.get('/api/subscription/training/equipment', restcontroller.getSubscriptionTrainingCat);
