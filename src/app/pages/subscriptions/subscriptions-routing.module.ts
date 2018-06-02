@@ -15,11 +15,6 @@ const routes: Routes = [{
     path: 'purchase',
     component: PurchaseTrainingComponent,
     canActivate: [LoginGuard],
-     /*  children: [{
-        path: ':id', 
-        component: PurchaseEquipmentTypeComponent,
-        canActivate: [LoginGuard],
-      }] */
   },  {
     path: 'purchase/:id',
     component: PurchaseEquipmentTypeComponent,

@@ -4,6 +4,8 @@ export interface TrainingCatState {
     loading?: boolean;
     loadingMsg?: string;
     trainingCat: TrainingCat[];
+    equipmentType : EquipmentType[];
+    equipmentData : EquipmentData[];
     count: number;
     currentPage: number;
   
@@ -16,4 +18,16 @@ export interface TrainingCatState {
     icon?: string;
     url : string;
   }
+
+  export interface EquipmentType{
+    id: string;
+    equipmentType: string;
+  }
+  
+  export interface EquipmentData{
+    id: string;
+    equipmentName: string;
+    url: string;
+  }
+  
   

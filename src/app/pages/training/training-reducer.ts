@@ -76,7 +76,7 @@ export type TrainingActions = GetEquipmentListAction |
                               GetEquipmentTypeDataListSuccessAction |
                               GetEquipmentTypeDataListFailAction
 
-export const initialTrainingState = {
+export const initialTrainingState : TrainingState= {
   errorCode: '',
   errorMsg: '',
   loading: true,

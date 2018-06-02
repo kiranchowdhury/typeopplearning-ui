@@ -19,14 +19,12 @@ export class TrainingService {
   }
 
   getEquipmentTypesList(payload: EquipmentTypeRes): Observable<EquipmentTypeContract> {
-    //console.log('==========in equipment Type service========');
     return this.apiConnector.get('/api/training/equipment/type', payload).pipe(
       map((resp: EquipmentTypeContract) => resp)
     )
   }
 
   getEquipmentListOnType(payload: EquipmentTypeIdRequest): Observable<EquipmentDataContract> {
-    //console.log('==========in equipment Type List service========');
     return this.apiConnector.get('/api/training/equipment/list', payload).pipe(
       map((resp: EquipmentDataContract) => resp)
     )

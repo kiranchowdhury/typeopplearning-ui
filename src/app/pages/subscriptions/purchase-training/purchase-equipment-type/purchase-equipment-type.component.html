@@ -8,4 +8,12 @@
     </ol>
   </nav>
   <tl-search-training></tl-search-training>
+  <div class="col-md-6 div-margin ">
+    <mat-chip-list>
+        <mat-chip class="equipment-cat-height"><p class="equipment-font-size"> <i class="fa fa-industry class-list-padding" ></i> {{ selectedEquipment}}</p>
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        
+      </mat-chip-list>
+</div>
 <tl-purchase-equipment-list></tl-purchase-equipment-list>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AppState } from './../../../../@models/app-state';
+import { Store } from '@ngrx/store';
+import { FormGroup, FormControl } from '@angular/forms';
+import { GetEquipmentTypeListAction} from './../../subcriptions-reducer';
 
 @Component({
   selector: 'tl-purchase-equipment-type',
@@ -10,14 +14,17 @@ export class PurchaseEquipmentTypeComponent implements OnInit {
   pathHashArray : string[];
   breadcrumbs = [];
   selectedEquipment : string;
-
-  constructor() { }
+  form: FormGroup ;
+  loading: boolean = false;
+  loadingMsg: string = '';
+  removable: boolean = true;
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
     var pathHash = window.location.hash;
-    console.log(pathHash);
+    //console.log(pathHash);
     this.pathHashArray = pathHash.split("/");
-    console.log(this.pathHashArray);
+    //console.log(this.pathHashArray);
     var link = "";
     for(var i=2; i<this.pathHashArray.length; i++){
       
@@ -36,6 +43,16 @@ export class PurchaseEquipmentTypeComponent implements OnInit {
       link: link,
       active: active,})
     }
+    this.form = new FormGroup({
+      equipmentCat: new FormControl(this.selectedEquipment.split(" ").join("-")),
+      
+    });
+    
+    //console.log('=====form value======on equipment type dispatch');
+    //console.log('on dispatch=======');
+    this.store.dispatch(new GetEquipmentTypeListAction(this.form.value));
   }
+
+  
 
 }
