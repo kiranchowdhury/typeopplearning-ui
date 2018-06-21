@@ -1,5 +1,6 @@
 import { TrainingCatState } from './subscriptions-state';
-import { TrainingCatContract, EquipmentTypeRes, EquipmentTypeContract, EquipmentTypeIdRequest, EquipmentDataContract } from './subscriptions-contract';
+import { TrainingCatContract, EquipmentTypeRes, EquipmentTypeContract, EquipmentTypeIdRequest, 
+    EquipmentDataContract, InvoiceContract } from './subscriptions-contract';
 import { Action } from "@ngrx/store";
 import { ErrorResponse } from "../../@core/error/error-response";
 import { AppState } from "../../@models/app-state";
@@ -16,6 +17,10 @@ export enum TrainingCategoryActionTypes {
     GET_EQUIPMENT_TYPE_DATA_LIST = 'Get Equipment Type Data List',
     GET_EQUIPMENT_TYPE_DATA_LIST_SUCCESS = 'Get Equipment Type Data List Success',
     GET_EQUIPMENT_TYPE_DATA_LIST_FAIL = 'Get Equipment Type Data List Fail',
+
+    GET_INVOICE_LIST = 'Get Invoice List',
+    GET_INVOICE_LIST_SUCCESS = 'Get Invoice List Success',
+    GET_INVOICE_LIST_FAIL = 'Get Invoice List Fail',
 }
 
 export class GetTrainingCategoryAction implements Action {
@@ -62,6 +67,21 @@ export class GetEquipmentTypeListAction implements Action {
     readonly type = TrainingCategoryActionTypes.GET_EQUIPMENT_TYPE_DATA_LIST_FAIL;
     constructor(public payload: ErrorResponse) {}
   }
+
+  export class GetInvoiceListAction implements Action {
+    readonly type = TrainingCategoryActionTypes.GET_INVOICE_LIST;
+    constructor() {}
+  }
+  
+  export class GetInvoiceListSuccessAction implements Action {
+    readonly type = TrainingCategoryActionTypes.GET_INVOICE_LIST_SUCCESS;
+    constructor(public payload: InvoiceContract) {}
+  }
+  
+  export class GetInvoiceListFailAction implements Action {
+    readonly type = TrainingCategoryActionTypes.GET_INVOICE_LIST_FAIL;
+    constructor(public payload: ErrorResponse) {}
+  }
   
 
 export type TrainingCatActions = GetTrainingCategoryAction | 
@@ -72,7 +92,8 @@ export type TrainingCatActions = GetTrainingCategoryAction |
                     GetEquipmentTypeListFailAction |
                     GetEquipmentTypeDataListAction |
                     GetEquipmentTypeDataListSuccessAction |
-                    GetEquipmentTypeDataListFailAction
+                    GetEquipmentTypeDataListFailAction | GetInvoiceListAction |
+                    GetInvoiceListSuccessAction | GetInvoiceListFailAction
 
 export const initialTrainingCatState: TrainingCatState = {
     loading: false,
@@ -153,6 +174,27 @@ export function trainingCatReducer(
             loadingMsg: '',
         }
     case TrainingCategoryActionTypes.GET_EQUIPMENT_TYPE_LIST_FAIL:
+        return {
+            ...state,
+            errorCode: action.payload.code,
+            errorMsg: action.payload.message,
+        }
+    case TrainingCategoryActionTypes.GET_INVOICE_LIST:
+    return {
+        ...state,
+        loading: true,
+        loadingMsg: 'Retreiving training libraries...'
+    }
+    case TrainingCategoryActionTypes.GET_INVOICE_LIST_SUCCESS:
+    console.log('=================on success=====');
+        return {
+            ...state,
+            invoiceList: action.payload.invoiceList,
+            count: action.payload.invoiceList.length,
+            loading: false,
+            loadingMsg: '',
+        }
+    case TrainingCategoryActionTypes.GET_INVOICE_LIST_FAIL:
         return {
             ...state,
             errorCode: action.payload.code,

@@ -6,6 +6,8 @@ export interface UserListState {
   userList?: User[];
   count: number;
   currentPage: number;
+  userDetail ?: UserDetailData;
+  userTrainingStatus?: UserTrainingStatus;
 }
 
 export interface User {
@@ -13,4 +15,18 @@ export interface User {
   noOfTrainings: number;
   status: string;
   userId: string;
+  url: string;
+}
+
+export interface UserTrainingStatus { 
+  id: string;
+  trainingName : string;
+  staus : string;
+}
+
+export interface UserDetailData {
+  fullName : string;
+  email : string;
+  phone : string;
+  address : string;
 }

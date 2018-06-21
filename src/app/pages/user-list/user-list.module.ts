@@ -11,6 +11,10 @@ import { userListReducer } from './user-list-reducer';
 import { UserListEffects } from './user-list-effects'
 import { EffectsModule } from '@ngrx/effects';
 import { NewUserComponent } from './new-user/new-user.component';
+import { UserListComponent} from './user-list-component';
+import { UserDetailComponent } from './user-list-table/user-detail/user-detail.component';
+import { UserDetailDataComponent } from './user-list-table/user-detail-data/user-detail-data.component';
+import { UserTrainingStatusComponent } from './user-list-table/user-training-status/user-training-status.component';
 
 @NgModule({
   imports: [
@@ -23,6 +27,6 @@ import { NewUserComponent } from './new-user/new-user.component';
     }),
     EffectsModule.forFeature([UserListEffects])
   ],
-  declarations: [UserListContainerComponent, UserListSearchComponent, UserListTableComponent]
+  declarations: [UserListComponent, UserListContainerComponent, UserListSearchComponent, UserListTableComponent, UserDetailComponent, UserDetailDataComponent, UserTrainingStatusComponent]
 })
 export class UserListModule { }

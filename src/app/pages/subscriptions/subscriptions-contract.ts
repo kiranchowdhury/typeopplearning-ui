@@ -1,4 +1,4 @@
-import{TrainingCat, EquipmentType, EquipmentData } from './subscriptions-state'
+import{TrainingCat, EquipmentType, EquipmentData, Invoice } from './subscriptions-state'
 
 export interface TrainingCatContract {
     status: number;
@@ -32,3 +32,11 @@ export interface TrainingCatContract {
     equipmentId : string;
     equipmentType: string;
   }
+
+  export interface InvoiceContract {
+    status: number;
+    code: string;
+    message: string;
+    count: number;
+    invoiceList: Invoice[];
+  } 

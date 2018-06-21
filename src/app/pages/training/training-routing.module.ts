@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { TrainingContainerComponent } from './training-container/training-container.component';
 import { LoginGuard } from '../../@core/guards/login.guard';
 import { TrainingComponent} from './training-component';
-import { EquipmentTypeComponent} from './training-equipment/equipment-type/equipment-type.component'
+import { EquipmentTypeComponent } from './training-equipment/equipment-type/equipment-type.component';
+import { TrainingStartComponent } from './training-equipment/equipment-type-list/training-start/training-start.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,10 +17,11 @@ const routes: Routes = [{
   },
     {
       path: ':id',
-      component: EquipmentTypeComponent/* ,
-      data: {
-        
-      } */
+      component: EquipmentTypeComponent
+  },
+    {
+    path: ':id/:id',
+    component: TrainingStartComponent
   } 
   ]
 }];

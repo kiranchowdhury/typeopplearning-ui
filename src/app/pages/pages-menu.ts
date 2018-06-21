@@ -1,4 +1,5 @@
 import { NbMenuItem } from '@nebular/theme';
+import { group } from '@angular/animations/src/animation_metadata';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
@@ -31,21 +32,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Subscriptions',
     icon: 'fa fa-clipboard',
-    link: '/pages/subscriptions',
-    children: [
-      {
-        title: 'Purchase Training',
-        link: '/pages/subscriptions/purchase'
-      },
-      {
-        title: 'Allowed Training',
-        link: '/pages/subscriptions/allowedtraining'
-      },
-      {
-        title: 'Budget',
-        link: '/pages/subscriptions/budget'
-      }
-    ]
+    // link: '/pages/subscriptions',
+    group: true,
+    // children: [
+
+    // ]
+
+  },
+  {
+    title: 'Purchase Training',
+    link: '/pages/subscriptions/purchase'
+  },
+  {
+    title: 'Allowed Training',
+    link: '/pages/subscriptions/allowedtraining'
+  },
+  {
+    title: 'Budget',
+    link: '/pages/subscriptions/budget'
   },
   {
     title: 'User list',

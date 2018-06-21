@@ -15,20 +15,31 @@ import { CustomerSearchComponent } from './customer-search/customer-search.compo
 import { AgGridModule } from 'ag-grid-angular';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { CustomerComponent} from './customer.component';
+import { CustomerDataComponent } from './customerlist/customer-data/customer-data.component';
+import { CustomerDataDetailComponent } from './customerlist/customer-data-detail/customer-data-detail.component';
+import { MaterialModule} from './../../material.module';
+import { CustomerBudgetDetailComponent } from './customerlist/customer-data-detail/customer-budget-detail/customer-budget-detail.component';
+import { CustomerBudgetTableComponent } from './customerlist/customer-data-detail/customer-budget-table/customer-budget-table.component';
+import { CustomerUserComponent } from './customerlist/customer-data-detail/customer-user/customer-user.component';
+import { CustomerUserListComponent } from './customerlist/customer-data-detail/customer-user-list/customer-user-list.component'
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { CustomerFilter} from  './customer-filter.pipe';
 
 @NgModule({
   imports: [
     SharedModule,
     CustomersRoutingModule,
     NgbModule,
+    MaterialModule,
     AgGridModule.withComponents([]),
+    PaginationModule.forRoot(),
     StoreModule.forFeature('customers',{
         custState: customerReducer
     }),
     EffectsModule.forFeature([CustomersEffects])
   ],
-  declarations: [CustomerContainerComponent, CustomerlistComponent, CustomerItemComponent, CustomerSearchComponent, NewCustomerComponent],
+  declarations: [CustomerComponent, CustomerContainerComponent, CustomerlistComponent, CustomerItemComponent, CustomerSearchComponent, NewCustomerComponent, CustomerDataComponent, CustomerDataDetailComponent, CustomerBudgetDetailComponent, CustomerBudgetTableComponent, CustomerUserComponent, CustomerUserListComponent, CustomerFilter],
   entryComponents: [NewCustomerComponent],
   providers: [CustomersService]
 })

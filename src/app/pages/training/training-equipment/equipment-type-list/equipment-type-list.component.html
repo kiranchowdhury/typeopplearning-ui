@@ -13,8 +13,8 @@
                 <div class="row">
                     <div class="col-md-8"><label class="label-text">{{equip.equipmentName}}</label></div>
                     <div class="col-md-4">
-                            <tl-button [icon]="'fa fa-play-circle-o'" (click)="getStartTraining(equip)" class="label-button" >
-                                    <span btnlabel> Start</span>
+                            <tl-button [icon]="'fa fa-play-circle-o'" class="label-button" >
+                                    <span btnlabel> <a class="start-anchor-style" href="{{pathHash}}/{{equip.url}}"> Start</a></span>
                                 </tl-button>
                     </div>
                 </div>

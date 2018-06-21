@@ -5,6 +5,8 @@ var path = require('path');
 var fs = require('fs');
 var jwt    = require('jsonwebtoken');
 var rootPath = path.normalize(__dirname+'/../../');
+// var mongoose = require('mongoose');
+User = require('../model/user');
 
 exports.doGet = function(req, res) {
   var queryString = req.query;
@@ -59,26 +61,52 @@ exports.doPost = function(req, res) {
 
 exports.getCustomers = function(req, res) {
  // console.log('Get Customers Api Called');
- var customers = createDummyCustomers();
-  var resp = {
-    status: 1,
-    code: 'OK',
-    message: 'success',
-    customers: customers,
-    count: customers.length
-  }
+//  var customers = createDummyCustomers();
+//  var mongoUsers = mongoose.Model('User');
+//  console.log('mongo user', mongoUsers);
+//  mongoUsers.find()
+//  .then(function (doc) {
+//    console.log('doc==', doc);
+//  });
+var resp = {
+  status: 1,
+  code: 'OK',
+  message: 'success',
+  // customers: customers,
+  // count: customers.length
+}
+User.getUsers(function (err, users) {
+  console.log('users', users);
+  resp.customers = users;
+  resp.count = users.length
   res.send(resp);
+});
+
+  // res.send(resp);
 }
 
 exports.createCustomer = function(req, res) {
-  // console.log('Createting customer', req.body);
+  console.log('Createting customer', req.body);
   var resp = {
     status: 1,
     code: 'OK',
     message: 'success',
-    customer: req.body
+    // customer: req.body
   }
-  res.send(resp);
+  User.createUser(req.body, function (err, user) {
+    console.log('response creating cutomer: ', user);
+    if(err){
+      resp = {
+        status: 0,
+        code: 'Error',
+        message: 'Failed to save customer data'
+      }
+    }
+    else {
+      resp.customer = user;
+    }
+    res.send(resp);
+  });
   }
 
   exports.removeCustomer = function(req, res) {
@@ -214,7 +242,7 @@ exports.createUser = function(req, res) {
   }
 
   exports.getEquipmentList = function (req, res) {
-  
+
     var payload = req.query;
     var equipmentType = payload.equipmentType;
     var equimentId = payload.equipmentId;
@@ -228,10 +256,10 @@ exports.createUser = function(req, res) {
     }
      //console.log(resp);
     res.send(resp);
-    
+
   }
   exports.getSubscriptionTrainingCat = function(req, res){
-    
+
     var equipmentCategory = createDummySubsTrnCategory();
     var resp = {
       status: 1,
@@ -239,6 +267,81 @@ exports.createUser = function(req, res) {
       message: 'success',
       equipmentCat: equipmentCategory,
       count: equipmentCategory.length
+    }
+    res.send(resp);
+  }
+  exports.getUserDetail = function(req, res){
+
+    var payload = req.query;
+
+    var userDetail = createDummyUserDetail(payload.fullName);
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      userDetail: userDetail
+
+    }
+    res.send(resp);
+  }
+
+  exports.getUserTraining = function(req, res){
+
+    var payload = req.query;
+
+    var userTraining = createDummyUserTraining(payload.fullName);
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      userTrainingStatus: userTraining
+
+    }
+    res.send(resp);
+  }
+
+  exports.getTrainingStartDetail = function(req, res){
+
+    var payload = req.query;
+
+    var equimentDetail = createDummyTrainingStartDetail(payload.equipmentId);
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      equipmentDetail: equimentDetail
+
+    }
+    res.send(resp);
+  }
+
+  exports.getCustomerDetail = function(req, res){
+
+    var payload = req.query;
+
+    var customerDetail = createDummyCustomerDetail(payload.customerName);
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      customerDetail: customerDetail
+
+    }
+    res.send(resp);
+  }
+
+  exports.getCustomerBudgetDetail = function(req, res){
+
+    var payload = req.query;
+
+    var budgetDetail = createDummyCustomerBudgetDetail(payload.customerName);
+    var remainingBudget = createDummyRemainingBudget(payload.customerName);
+    var resp = {
+      status: 1,
+      code: 'OK',
+      message: 'success',
+      budgetDetail: budgetDetail,
+      remainingBudget :remainingBudget
     }
     res.send(resp);
   }
@@ -253,7 +356,8 @@ createDummyCustomers = function(){
       noOfUsers: i*12,
       email: 'custemai_'+i+'@'+'Cust Name-'+i+'.com',
       phone: '00'+i+'1011',
-      address: 'Cust Address-'+i
+      address: 'Cust Address-'+i,
+      url: 'cust-name-'+i
     })
   }
   return customers;
@@ -293,7 +397,8 @@ createDummyUserList = function() {
         fullName: 'Melisa Golubic',
         noOfTrainings: 29+i,
         status: 'waiting',
-        userId: 'MG-'+i
+        userId: 'MG-'+i,
+        url: 'Melisa Golubic'.replace(" ","-")
       })
     }
     else if(i%3 === 0){
@@ -301,7 +406,8 @@ createDummyUserList = function() {
         fullName: 'Melisa Golubic',
         noOfTrainings: 29+i,
         status: 'passed',
-        userId: 'MG-'+i
+        userId: 'MG-'+i,
+        url: 'Melisa Golubic'.replace(" ","-")
       })
     }
     else {
@@ -309,7 +415,8 @@ createDummyUserList = function() {
         fullName: 'Melisa Golubic',
         noOfTrainings: 29+i,
         status: 'in progress',
-        userId: 'MG-'+i
+        userId: 'MG-'+i,
+        url: 'Melisa Golubic'.replace(" ","-")
       })
     }
   }
@@ -433,4 +540,118 @@ createDummySubsTrnCategory = function(){
   return equipmentCategories;
 }
 
+createDummyUserDetail = function(userFullName){
+  userDetail = {
+    fullName : userFullName,
+    email : userFullName+"@mail.com",
+    phone : "9876543210",
+    address : "Sohna Road, Gurgoan",
+  };
+  return userDetail;
+}
 
+createDummyUserTraining = function(userFullName){
+  userTraining = [];
+  let trnName ="";
+  for(var i=0;i<3;i++){
+    if(i==0)
+      trnName="Computer Architecture";
+    else if(i==1){
+      trnName="Introduction to solar cells";
+    }else{
+      trnName="Embedded System Software";
+    }
+    userTraining.push({
+      id: 'trn-000'+i,
+      trainingName : trnName,
+      staus : "passed"
+    })
+  }
+
+  return userTraining;
+}
+
+createDummyTrainingStartDetail = function(equimentId){
+  trainingStartData = [];
+
+  trainingStartData.push({
+    title: '1. Overview of Material Handling',
+    detail : 'A machine uses power to apply forces and control movement to perform an intended action. Machines can be driven by animals and people,'+
+      'by natural forces such as wind and water, and by chemical, thermal, or electrical power, and include a system of mechanisms that shape the actuator input to achieve a specific application of'+
+      'output forces and movement. They can also include computers and sensors that monitor performance and plan movement, often called mechanical systems.'+
+      'Renaissance natural philosophers identified six simple machines which were the elementary devices that put a load into motion, and calculated the ratio of output force to input force, known today as mechanical advantage.'+
+      'Modern machines are complex systems that consist of structural elements, mechanisms and control components and include interfaces for convenient use.'+
+      'Examples include a wide range of vehicles, such as automobiles, boats and airplanes, appliances in the home and office,'+
+      'building air handling and water handling systems, as well as farm machinery, machine tools and factory automation systems and robots.'
+  })
+
+  trainingStartData.push({
+    title: '2. Design of MH Systems',
+    detail : 'A machine uses power to apply forces and control movement to perform an intended action. Machines can be driven by animals and people,'+
+      'by natural forces such as wind and water, and by chemical, thermal, or electrical power, and include a system of mechanisms that shape the actuator input to achieve a specific application of'+
+      'output forces and movement. They can also include computers and sensors that monitor performance and plan movement, often called mechanical systems.'+
+      'Renaissance natural philosophers identified six simple machines which were the elementary devices that put a load into motion, and calculated the ratio of output force to input force, known today as mechanical advantage.'+
+      'Modern machines are complex systems that consist of structural elements, mechanisms and control components and include interfaces for convenient use.'+
+      'Examples include a wide range of vehicles, such as automobiles, boats and airplanes, appliances in the home and office,'+
+      'building air handling and water handling systems, as well as farm machinery, machine tools and factory automation systems and robots.'
+  })
+
+  trainingStartData.push({
+    title: '3. Overview of Material Handling',
+    detail : 'A machine uses power to apply forces and control movement to perform an intended action. Machines can be driven by animals and people,'+
+      'by natural forces such as wind and water, and by chemical, thermal, or electrical power, and include a system of mechanisms that shape the actuator input to achieve a specific application of'+
+      'output forces and movement. They can also include computers and sensors that monitor performance and plan movement, often called mechanical systems.'+
+      'Renaissance natural philosophers identified six simple machines which were the elementary devices that put a load into motion, and calculated the ratio of output force to input force, known today as mechanical advantage.'+
+      'Modern machines are complex systems that consist of structural elements, mechanisms and control components and include interfaces for convenient use.'+
+      'Examples include a wide range of vehicles, such as automobiles, boats and airplanes, appliances in the home and office,'+
+      'building air handling and water handling systems, as well as farm machinery, machine tools and factory automation systems and robots.'
+  })
+
+  trainingStartData.push({
+    title: '4. Design of MH Systems',
+    detail : 'A machine uses power to apply forces and control movement to perform an intended action. Machines can be driven by animals and people,'+
+      'by natural forces such as wind and water, and by chemical, thermal, or electrical power, and include a system of mechanisms that shape the actuator input to achieve a specific application of'+
+      'output forces and movement. They can also include computers and sensors that monitor performance and plan movement, often called mechanical systems.'+
+      'Renaissance natural philosophers identified six simple machines which were the elementary devices that put a load into motion, and calculated the ratio of output force to input force, known today as mechanical advantage.'+
+      'Modern machines are complex systems that consist of structural elements, mechanisms and control components and include interfaces for convenient use.'+
+      'Examples include a wide range of vehicles, such as automobiles, boats and airplanes, appliances in the home and office,'+
+      'building air handling and water handling systems, as well as farm machinery, machine tools and factory automation systems and robots.'
+  })
+
+  return trainingStartData;
+}
+
+createDummyCustomerDetail = function(customername){
+  customerDetail = {
+    customerName : customername,
+    contactName : 'Thomas Hardy',
+    email : 'thomas.hardy@company.com',
+    phone: '+1 890 456 4164',
+    address: 'Sohna Road, Gurgaon',
+    users: '7',
+    remainingBudget: '$10,000'
+  };
+
+  return customerDetail;
+}
+
+createDummyRemainingBudget = function(customerName){
+  remainingBudget = {
+    remainingBudget : '$10000'
+  }
+  return remainingBudget;
+}
+createDummyCustomerBudgetDetail = function(customername){
+  let date = new Date();
+  budgetDetail = [];
+  for(i= 1; i<9; i++){
+    budgetDetail.push({
+      transactionId : "TRN-000-"+i,
+      description : "Payment-000-"+i,
+      type : "Payment",
+      date : date,
+      amount : '$1000'
+    })
+  }
+  return budgetDetail;
+}

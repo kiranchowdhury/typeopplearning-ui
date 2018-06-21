@@ -1,4 +1,4 @@
-import { User } from './user-list-state';
+import { User, UserDetailData, UserTrainingStatus} from './user-list-state';
 
 export interface UserListContract {
   status: number;
@@ -28,4 +28,27 @@ export interface RemoveUserResponse {
   code: string;
   message: string;
   user: User;
+}
+
+export interface UserDetailReq{
+  fullName : string;
+}
+
+export interface UserDetailContract{
+  status: number;
+  code: string;
+  message: string;
+  userDetail : UserDetailData 
+}
+
+export interface UserTrainingReq{
+  fullName : string;
+}
+
+export interface UserTrainingContract { 
+  status: number;
+  code: string;
+  message: string;
+  userTrainingStatus : UserTrainingStatus ;
+  count : number;
 }

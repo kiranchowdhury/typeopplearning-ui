@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
-import { UserListContract, CreateUser, CreateUserResponse, RemoveUser, RemoveUserResponse } from "./user-list-contract"
+import { UserListContract, CreateUser, CreateUserResponse, RemoveUser, RemoveUserResponse ,
+    UserDetailReq, UserDetailContract, UserTrainingReq, UserTrainingContract} from "./user-list-contract"
 import { ErrorResponse } from "../../@core/error/error-response";
 import { UserListState, User } from "./user-list-state";
 import { AppState } from "../../@models/app-state";
@@ -15,7 +16,15 @@ export enum UserListActionTypes {
 
   REMOVE_USER = "Remove User",
   REMOVE_USER_SUCCESS = "Remove User Success",
-  REMOVE_USER_FAILED = "Remove User Failed"
+  REMOVE_USER_FAILED = "Remove User Failed",
+
+  GET_USER_DETAIL = "Get User Detail",
+  GET_USER_DETAIL_SUCCESS = "Get User Detail Success",
+  GET_USER_DETAIL_FAIL = "Get User Detail Fail",
+
+  GET_TRAINING_STATUS = "Get User Training Status",
+  GET_TRAINING_STATUS_SUCCESS = "Get User Training Status Success",
+  GET_TRAINING_STATUS_FAIL = "Get User Training Status Fail"
 
 }
 
@@ -64,6 +73,35 @@ export class RemoveUserFailedAction implements Action {
   constructor (public payload: ErrorResponse) {}
 }
 
+export class GetUserDetailAction implements Action {
+  readonly type = UserListActionTypes.GET_USER_DETAIL;
+  constructor (public payload: UserDetailReq) {}
+}
+
+export class GetUserDetailSuccessAction implements Action {
+  readonly type = UserListActionTypes.GET_USER_DETAIL_SUCCESS;
+  constructor (public payload: UserDetailContract) {}
+}
+
+export class GetUserDetailFailAction implements Action {
+  readonly type = UserListActionTypes.GET_USER_DETAIL_FAIL;
+  constructor (public payload: ErrorResponse) {}
+}
+
+export class GetTrainingStatusAction implements Action {
+  readonly type = UserListActionTypes.GET_TRAINING_STATUS;
+  constructor (public payload: UserTrainingReq) {}
+}
+
+export class GetTrainingStatusSuccessAction implements Action {
+  readonly type = UserListActionTypes.GET_TRAINING_STATUS_SUCCESS;
+  constructor (public payload: UserTrainingContract) {}
+}
+
+export class GetTrainingStatusFailAction implements Action {
+  readonly type = UserListActionTypes.GET_TRAINING_STATUS_FAIL;
+  constructor (public payload: ErrorResponse) {}
+}
 
 
 export type UserListActions = GetUserListAction |
@@ -74,7 +112,11 @@ export type UserListActions = GetUserListAction |
                               CreateUserFailedAction |
                               RemoveUserAction |
                               RemoveUserSuccessAction |
-                              RemoveUserFailedAction
+                              RemoveUserFailedAction |
+                              GetUserDetailAction |
+                              GetUserDetailSuccessAction | GetUserDetailFailAction |
+                              GetTrainingStatusAction |
+                              GetTrainingStatusSuccessAction | GetTrainingStatusFailAction
 
 export const initialUserListState: UserListState = {
   errorCode: '',
@@ -157,6 +199,50 @@ export function userListReducer (
     }
     case UserListActionTypes.REMOVE_USER_FAILED :
     console.log('---remove-user---failed action');
+    return {
+      ...state,
+      loading: false,
+      errorCode: action.payload.code,
+      errorMsg: action.payload.message
+    }
+
+    case UserListActionTypes.GET_USER_DETAIL :
+     return {
+      ...state,
+      loading: true,
+      loadingMsg: 'Get User Detail'
+    }
+    case UserListActionTypes.GET_USER_DETAIL_SUCCESS :
+    console.log('success--------------user detail', action.payload.userDetail);
+    return {
+      ...state,
+      loading: false,
+      loadingMsg: 'User Detail Successfully received...',
+      userDetail: action.payload.userDetail
+    }
+    case UserListActionTypes.GET_USER_DETAIL_FAIL :
+    return {
+      ...state,
+      loading: false,
+      errorCode: action.payload.code,
+      errorMsg: action.payload.message
+    }
+    case UserListActionTypes.GET_TRAINING_STATUS :
+     return {
+      ...state,
+      loading: true,
+      loadingMsg: 'Get User Detail'
+    }
+    case UserListActionTypes.GET_TRAINING_STATUS_SUCCESS :
+    //console.log('=============on success============');
+    //console.log(action.payload);
+    return {
+      ...state,
+      loading: false,
+      loadingMsg: 'User Training Detail Successfully received...',
+      userTrainingStatus: action.payload.userTrainingStatus
+    }
+    case UserListActionTypes.GET_TRAINING_STATUS_FAIL :
     return {
       ...state,
       loading: false,

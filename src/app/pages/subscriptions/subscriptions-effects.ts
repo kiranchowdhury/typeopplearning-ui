@@ -1,4 +1,4 @@
-import { TrainingCatContract, EquipmentDataContract, EquipmentTypeContract } from './subscriptions-contract';
+import { TrainingCatContract, EquipmentDataContract, EquipmentTypeContract, InvoiceContract } from './subscriptions-contract';
 import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
 import { Actions, Effect } from "@ngrx/effects";
@@ -9,7 +9,8 @@ import { switchMap, map } from "rxjs/operators";
 import { TrainingCategoryActionTypes, GetTrainingCategoryAction, GetTrainingCategorySuccessAction, 
     GetTrainingCategoryFailAction, GetEquipmentTypeListAction, GetEquipmentTypeListSuccessAction,
     GetEquipmentTypeListFailAction, GetEquipmentTypeDataListAction, GetEquipmentTypeDataListSuccessAction,
-    GetEquipmentTypeDataListFailAction } from './subcriptions-reducer';
+    GetEquipmentTypeDataListFailAction, GetInvoiceListAction, GetInvoiceListSuccessAction,
+    GetInvoiceListFailAction } from './subcriptions-reducer';
 
 @Injectable()
 export class TrainingCatEffects {
@@ -53,6 +54,18 @@ export class TrainingCatEffects {
             map((response: EquipmentDataContract) =>
         (response.status === 1)? new GetEquipmentTypeDataListSuccessAction(response) :
         new GetEquipmentTypeDataListFailAction({code: response.code, message: response.message}))
+        ))
+        )
+    }
+
+    @Effect()
+    getInvoiceList(): Observable<Action> {
+        return this.action$.ofType(TrainingCategoryActionTypes.GET_INVOICE_LIST).pipe(
+        switchMap((action: GetInvoiceListAction)=>
+        this.subscriptionService.getInvoiceList().pipe(
+            map((response: InvoiceContract) =>
+        (response.status === 1)? new GetInvoiceListSuccessAction(response) :
+        new GetInvoiceListFailAction({code: response.code, message: response.message}))
         ))
         )
     }

@@ -4,10 +4,13 @@ export interface CustomersState {
     isError?: boolean;
     loading?: boolean;
     loadingMsg?: string;
-    customers: Customer[];
+    customers?: Customer[];
     count: number;
     currentPage: number;
-
+    customerDetail ?: CustomerDetail;
+    remainingBudget ?: RemainingBudget;
+    budgetDetail ?: BudgetDetail[];
+    customerUserList ?: CustomerUserList[];
 }
 
 export interface Customer {
@@ -19,7 +22,8 @@ export interface Customer {
     phone: string;
     address: string;
     remainingBudget?: number;
-    payments?: Payment[];    
+    payments?: Payment[];   
+    url: string;
 }
 
 export interface Payment {
@@ -30,3 +34,33 @@ export interface Payment {
     amount: number;
 
 }
+
+export interface CustomerDetail {
+    customerName: string;
+    contactName: string;
+    email : string;
+    phone: string;
+    address: string;
+    users: string;
+    remainingBudget: string;
+}
+
+export interface RemainingBudget{
+    remainingBudget : string;
+}
+
+export interface BudgetDetail { 
+    transactionId : string;
+    description : string;
+    type : string;
+    date : Date;
+    amount : string
+}
+
+export interface CustomerUserList {
+    fullName: string;
+    noOfTrainings: number;
+    status: string;
+    userId: string;
+    url: string;
+  }

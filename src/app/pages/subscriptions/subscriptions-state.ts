@@ -6,6 +6,7 @@ export interface TrainingCatState {
     trainingCat: TrainingCat[];
     equipmentType : EquipmentType[];
     equipmentData : EquipmentData[];
+    invoiceList ?: Invoice[];
     count: number;
     currentPage: number;
   
@@ -30,4 +31,11 @@ export interface TrainingCatState {
     url: string;
   }
   
-  
+  export interface Invoice {
+    id: string;
+    invoiceNumber: number;
+    invoiceDate: Date ;
+    invoiceTotal: number;
+    dueDate : Date;
+    status : string;
+  }

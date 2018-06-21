@@ -1,4 +1,5 @@
-import { UserListContract, CreateUser, CreateUserResponse, RemoveUser, RemoveUserResponse } from './user-list-contract';
+import { UserListContract, CreateUser, CreateUserResponse, RemoveUser, RemoveUserResponse ,
+    UserDetailReq, UserDetailContract, UserTrainingReq, UserTrainingContract} from './user-list-contract';
 import { Injectable } from '@angular/core';
 import { ApiConnectorService } from '../../@core/api-handlers/api-connector.service';
 import { map } from 'rxjs/operators';
@@ -26,6 +27,20 @@ export class UserListService {
   removeUser(payload: RemoveUser): Observable<RemoveUserResponse> {
     return this.apiConnector.post('/api/user/remove', payload).pipe(
       map((result: RemoveUserResponse) => result)
+    )
+  }
+
+  getUserDetail(payload: UserDetailReq): Observable<UserDetailContract> {
+    //console.log(payload);
+    return this.apiConnector.get('/api/user/detail', payload).pipe(
+      map((result: UserDetailContract) => result)
+    )
+  }
+
+  getUserTrainingStatus(payload: UserTrainingReq): Observable<UserTrainingContract> {
+    //console.log(payload);
+    return this.apiConnector.get('/api/user/training', payload).pipe(
+      map((result: UserTrainingContract) => result)
     )
   }
 

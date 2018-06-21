@@ -6,6 +6,7 @@ export interface TrainingState {
   equipmentList? : Equipment[];
   equipmentType? : EquipmentType[];
   equipmentData? : EquipmentData[];
+  equipmentDetail? : EquipmentDetail[];
   count: number;
   currentPage: number;
 }
@@ -27,4 +28,9 @@ export interface EquipmentData{
   id: string;
   equipmentName: string;
   url: string;
+}
+
+export interface EquipmentDetail {
+  title : string;
+  detail : string;
 }

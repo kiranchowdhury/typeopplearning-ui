@@ -21,7 +21,8 @@ import {
   MatSortModule,
   MatSelectModule,
   MatChipsModule,
-  MatExpansionModule
+  MatExpansionModule,
+  Sort
 } from '@angular/material';
 
 @NgModule({

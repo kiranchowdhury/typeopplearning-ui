@@ -1,0 +1,63 @@
+<div class="row row-margin-style">
+  <div class="col-md-3">
+    Customer Name : 
+  </div>
+  <div class="col-md-9 " >
+      <label class="label-style" *ngIf="mode==='view'">{{customerDetail.customerName}}</label>
+      <input type="text" *ngIf="mode==='edit'" class="input-type-style" [value]="customerDetail.customerName" #nameedit >
+  </div>
+  
+  <div class="col-md-3">
+      Contact Name : 
+    </div>
+    <div class="col-md-9 ">
+        <label class="label-style" *ngIf="mode==='view'">{{customerDetail.contactName}}</label>
+        <input type="text" *ngIf="mode==='edit'" class="input-type-style" [value]="customerDetail.contactName" #nameedit >
+    </div>
+    <div class="col-md-3">
+      Email : 
+    </div>
+    <div class="col-md-9 ">
+        <label class="label-style" *ngIf="mode==='view'">{{customerDetail.email}}</label>
+        <input type="text" *ngIf="mode==='edit'" class="input-type-style" [value]="customerDetail.email" #nameedit >
+    </div>
+    <div class="col-md-3 ">
+      Phone : 
+    </div>
+    <div class="col-md-9 ">
+        <label class="label-style" *ngIf="mode==='view'">{{customerDetail.phone}}</label>
+        <input type="text" *ngIf="mode==='edit'" class="input-type-style" [value]="customerDetail.phone" #nameedit >
+    </div>
+    <div class="col-md-3 ">
+      Address : 
+    </div>
+    <div class="col-md-9 ">
+        <label class="label-style" *ngIf="mode==='view'">{{customerDetail.address}}</label>
+        <input type="text" *ngIf="mode==='edit'" class="input-type-style" [value]="customerDetail.address" #nameedit >
+    </div>
+  
+    <div class="col-md-3 ">
+      Users : 
+    </div>
+    <div class="col-md-5 ">
+        <label class="label-style" *ngIf="mode==='view'">{{customerDetail.users}}</label>
+        <input type="text" *ngIf="mode==='edit'" class="input-type-style" [value]="customerDetail.users" #nameedit >
+    </div>
+    <div class="col-md-4" [ngClass]="{'btn-margin-view-style': mode==='view','btn-margin-edit-style': mode==='edit'}">
+      <tl-button [icon]="'fa fa-address-book-o'" class="btn-float-style">
+        <span btnlabel> <a class="start-anchor-style" href="{{pathHash}}/user-list"> User List </a></span>
+      </tl-button>
+    </div>
+    <div class="col-md-3 ">
+      Remaining budget : 
+    </div>
+    <div class="col-md-5 ">
+        <label class="label-style" *ngIf="mode==='view'">{{customerDetail.remainingBudget}}</label>
+        <input type="text" *ngIf="mode==='edit'" class="input-type-style" [value]="customerDetail.remainingBudget" #nameedit >
+    </div>
+    <div class="col-md-4" [ngClass]="{'btn-margin-view-style': mode==='view','btn-margin-edit-style': mode==='edit'}">
+      <tl-button [icon]="'fa fa-file-o'" class="btn-float-style">
+        <span btnlabel>  <a class="start-anchor-style" href="{{pathHash}}/detail">  Details </a></span>
+      </tl-button>
+    </div>
+</div>

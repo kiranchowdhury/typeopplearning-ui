@@ -112,7 +112,13 @@ module.exports = function(app, config) {
   app.get('/api/training/equipment/type', restcontroller.getEquipmentTypes);
   app.get('/api/training/equipment/list', restcontroller.getEquipmentList);
   app.get('/api/subscription/training/equipment', restcontroller.getSubscriptionTrainingCat);
-
+  app.get('/api/user/detail', restcontroller.getUserDetail);
+  app.get('/api/user/training', restcontroller.getUserTraining);
+  app.get('/api/training/start/detail', restcontroller.getTrainingStartDetail);
+  app.get('/api/customers/detail', restcontroller.getCustomerDetail);
+  app.get('/api/customers/budget/detail', restcontroller.getCustomerBudgetDetail);
+  
+  
 	// Catch all other routes and return the index file
 	// app.get('*', (req, res) => {
   //   res.sendFile(path.join(__dirname, '../../dist/index.html'));

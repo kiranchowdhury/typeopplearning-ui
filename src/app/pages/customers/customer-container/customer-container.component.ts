@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../@models/app-state';
-import { selectorCustomers, GetCustomerAction, RemoveCustomerAction } from '../customers.reducer';
+import { selectorCustomers, GetCustomerAction, RemoveCustomerAction, CustomerDetailUpdateAction } from '../customers.reducer';
 import { CustomersState, Customer } from '../customers-state';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewCustomerComponent } from '../new-customer/new-customer.component';
 import { CreateCustomerRequest } from '../customer-contracts';
 import { ToastrService } from 'ngx-toastr';
+import { CustomerlistComponent} from './../customerlist/customerlist.component';
 
 @Component({
   selector: 'tl-customer-container',
@@ -23,6 +24,8 @@ export class CustomerContainerComponent implements OnInit {
   customers: Customer[];
   mode: string  = 'view';
   tostrPayLoad;
+  @ViewChild(CustomerlistComponent) customerCompo: CustomerlistComponent;
+
   constructor(private store: Store<AppState>,
     private modalService: NgbModal,
     private toastr: ToastrService) { }
@@ -73,6 +76,13 @@ export class CustomerContainerComponent implements OnInit {
   handleRemoveCustomer(customer: CreateCustomerRequest) {
     console.log("Removing customer", customer);
     this.store.dispatch(new RemoveCustomerAction(customer))
+  }
+
+  saveUpdatedList (){
+    console.log("============into save updated detail==========");
+    console.log(this.customerCompo.changedCustomerList);
+    this.store.dispatch(new CustomerDetailUpdateAction(this.customerCompo.changedCustomerList))
+    this.mode = "view";
   }
 
 }

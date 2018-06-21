@@ -15,6 +15,8 @@ import { SubscriptionService} from './subscriptions-service';
 import { SearchTrainingComponent } from './search-training/search-training.component';
 import { PurchaseEquipmentTypeComponent } from './purchase-training/purchase-equipment-type/purchase-equipment-type.component';
 import { PurchaseEquipmentListComponent } from './purchase-training/purchase-equipment-list/purchase-equipment-list.component';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 //import { SubscriptionsComponent} from './subscriptions-component'
 
 @NgModule({
@@ -27,7 +29,7 @@ import { PurchaseEquipmentListComponent } from './purchase-training/purchase-equ
   }),
   EffectsModule.forFeature([TrainingCatEffects])
   ],
-  declarations: [ SubscriptionContainerComponent, PurchaseTrainingComponent, AllowedTrainingComponent, BudgetComponent, SearchTrainingComponent, PurchaseEquipmentTypeComponent, PurchaseEquipmentListComponent],
+  declarations: [ SubscriptionContainerComponent, PurchaseTrainingComponent, AllowedTrainingComponent, BudgetComponent, SearchTrainingComponent, PurchaseEquipmentTypeComponent, PurchaseEquipmentListComponent, InvoicesComponent, InvoiceListComponent],
   providers: [SubscriptionService]
 })
 export class SubscriptionsModule { }

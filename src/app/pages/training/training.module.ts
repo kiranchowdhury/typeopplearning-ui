@@ -13,6 +13,8 @@ import { TrainingEffects } from './training-effects';
 import { EquipmentTypeComponent } from './training-equipment/equipment-type/equipment-type.component';
 import { EquipmentTypeListComponent } from './training-equipment/equipment-type-list/equipment-type-list.component'
 import { TrainingComponent } from './training-component';
+import { TrainingStartComponent } from './training-equipment/equipment-type-list/training-start/training-start.component';
+import { TrainingStartDataComponent } from './training-equipment/equipment-type-list/training-start-data/training-start-data.component';
 
 @NgModule({
   imports: [
@@ -25,6 +27,6 @@ import { TrainingComponent } from './training-component';
     }),
     EffectsModule.forFeature([TrainingEffects])
   ],
-  declarations: [TrainingComponent, TrainingContainerComponent, TrainingEquipmentComponent, EquipmentTypeComponent, EquipmentTypeListComponent]
+  declarations: [TrainingComponent, TrainingContainerComponent, TrainingEquipmentComponent, EquipmentTypeComponent, EquipmentTypeListComponent, TrainingStartComponent, TrainingStartDataComponent]
 })
 export class TrainingModule { }

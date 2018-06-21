@@ -1,4 +1,4 @@
-import { TrainingContract, EquipmentTypeContract, EquipmentDataContract } from './training-contract';
+import { TrainingContract, EquipmentTypeContract, EquipmentDataContract, EquipmentDetailContract } from './training-contract';
 import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
 import { Actions, Effect } from "@ngrx/effects";
@@ -10,7 +10,8 @@ import { TrainingActionTypes, GetEquipmentListAction,
   GetEquipmentListSuccessAction, GetEquipmentListFailedAction,
   GetEquipmentTypeListAction, GetEquipmentTypeListSuccessAction, 
   GetEquipmentTypeListFailAction, GetEquipmentTypeDataListAction,
-  GetEquipmentTypeDataListSuccessAction, GetEquipmentTypeDataListFailAction } from './training-reducer';
+  GetEquipmentTypeDataListSuccessAction, GetEquipmentTypeDataListFailAction,
+  GetTrainingStartDataAction, GetTrainingStartDataSuccessAction, GetTrainingStartDataFailAction } from './training-reducer';
 import { RouterEvent } from '@angular/router/src/events';
 
 @Injectable()
@@ -53,6 +54,18 @@ export class TrainingEffects {
         map((response: EquipmentDataContract) =>
       (response.status === 1)? new GetEquipmentTypeDataListSuccessAction(response) :
     new GetEquipmentTypeDataListFailAction({code: response.code, message: response.message}))
+      ))
+    )
+  }
+
+  @Effect()
+  getEquipmentDetail(): Observable<Action> {
+    return this.$action.ofType(TrainingActionTypes.GET_TRAINING_START_DATA).pipe(
+      switchMap((action: GetTrainingStartDataAction)=>
+      this.trainingService.getTrainingStartData(action.payload).pipe(
+        map((response: EquipmentDetailContract) =>
+      (response.status === 1)? new GetTrainingStartDataSuccessAction(response) :
+    new GetTrainingStartDataFailAction({code: response.code, message: response.message}))
       ))
     )
   }

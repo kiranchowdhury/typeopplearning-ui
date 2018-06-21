@@ -1,5 +1,7 @@
 import { Action } from "@ngrx/store";
-import { GetCustomersResponse, CreateCustomerRequest, CreateCustomerResponse } from "./customer-contracts";
+import { GetCustomersResponse, CreateCustomerRequest, CreateCustomerResponse,
+    GetCustomerDetailReq, CustomerDetailContract, CustomerBudgetReq, CustomerBudgetDetailContract,
+    CustomerUsersReq, CustomerUserListContract, DetailUpdateReq} from "./customer-contracts";
 import { ErrorResponse } from "../../@core/error/error-response";
 import { CustomersState, Customer } from "./customers-state";
 import { AppState } from "../../@models/app-state";
@@ -13,7 +15,24 @@ export enum CustomersActionTypes {
     CREATE_CUSTOMER_FAIL = 'Create Customer Fail',
     REMOVE_CUSTOMER = 'Remove Customer',
     REMOVE_CUSTOMER_SUCCESS = 'Remove Customer Success',
-    REMOVE_CUSTOMER_FAIL = 'Remove Customer Fail'
+    REMOVE_CUSTOMER_FAIL = 'Remove Customer Fail',
+
+    GET_CUSTOMER_DETAIL = 'Get Customer Detail',
+    GET_CUSTOMER_DETAIL_SUCCESS = 'Get Customer Detail Success',
+    GET_CUSTOMER_DETAIL_FAIL = 'Get Customer Detail Fail',
+
+    GET_CUSTOMER_BUDGET_DETAIL = 'Get Customer Budget Detail',
+    GET_CUSTOMER_BUDGET_DETAIL_SUCCESS = 'Get Customer Budget Detail Success',
+    GET_CUSTOMER_BUDGET_DETAIL_FAIL = 'Get Customer Budget Detail Fail',
+
+    GET_CUSTOMER_USERS = 'Get Customer User List',
+    GET_CUSTOMER_USERS_SUCCESS = 'Get Customer User List Success',
+    GET_CUSTOMER_USERS_FAIL = 'Get Customer User List Fail',
+
+    CUSTOMER_DETAIL_UPDATE = 'Update Customer Detail',
+    CUSTOMER_DETAIL_UPDATE_SUCCESS = 'Update Customer Detail Success',
+    CUSTOMER_DETAIL_UPDATE_FAIL = 'Update Customer Detail Fail',
+
 }
 
 export class GetCustomerAction implements Action {
@@ -61,6 +80,66 @@ export class RemoveCustomerFailAction implements Action {
     constructor(public payload: ErrorResponse) {}
 }
 
+export class GetCustomerDetailAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_DETAIL;
+    constructor(public payload: GetCustomerDetailReq) {}
+}
+
+export class GetCustomerDetailSuccessAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_DETAIL_SUCCESS;
+    constructor(public payload: CustomerDetailContract) {}
+}
+
+export class GetCustomerDetailFailAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_DETAIL_FAIL;
+    constructor(public payload: ErrorResponse) {}
+}
+
+export class GetCustomerBudgetDetailAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_BUDGET_DETAIL;
+    constructor(public payload: CustomerBudgetReq) {}
+}
+
+export class GetCustomerBudgetDetailSuccessAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_BUDGET_DETAIL_SUCCESS;
+    constructor(public payload: CustomerBudgetDetailContract) {}
+}
+
+export class GetCustomerBudgetDetailFailAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_BUDGET_DETAIL_FAIL;
+    constructor(public payload: ErrorResponse) {}
+}
+
+export class GetCustomerUserListAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_USERS;
+    constructor(public payload: CustomerUsersReq) {}
+}
+
+export class GetCustomerUserListSuccessAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_USERS_SUCCESS;
+    constructor(public payload: CustomerUserListContract) {}
+}
+
+export class GetCustomerUserListFailAction implements Action {
+    readonly type = CustomersActionTypes.GET_CUSTOMER_USERS_FAIL;
+    constructor(public payload: ErrorResponse) {}
+}
+
+export class CustomerDetailUpdateAction implements Action {
+    readonly type = CustomersActionTypes.CUSTOMER_DETAIL_UPDATE;
+    constructor(public payload: DetailUpdateReq) {}
+}
+
+export class CustomerDetailUpdateSuccessAction implements Action {
+    readonly type = CustomersActionTypes.CUSTOMER_DETAIL_UPDATE_SUCCESS;
+    constructor(public payload: GetCustomersResponse) {}
+}
+
+export class CustomerDetailUpdateFailAction implements Action {
+    readonly type = CustomersActionTypes.CUSTOMER_DETAIL_UPDATE_FAIL;
+    constructor(public payload: ErrorResponse) {}
+}
+
 export type CustomersActions = GetCustomerAction |
                                GetCustomerSuccessAction |
                                GetCustomerFailAction |
@@ -69,7 +148,16 @@ export type CustomersActions = GetCustomerAction |
                                CreateCustomerFailAction |
                                RemoveCustomerAction |
                                RemoveCustomerSuccessAction |
-                               RemoveCustomerFailAction
+                               RemoveCustomerFailAction |
+                               GetCustomerDetailAction | 
+                               GetCustomerDetailSuccessAction | GetCustomerDetailFailAction |
+                               GetCustomerBudgetDetailAction | 
+                               GetCustomerBudgetDetailSuccessAction | GetCustomerBudgetDetailFailAction |
+                               GetCustomerUserListAction | GetCustomerUserListSuccessAction |
+                               GetCustomerUserListFailAction | CustomerDetailUpdateAction | 
+                               CustomerDetailUpdateSuccessAction |  CustomerDetailUpdateFailAction
+
+
 export const initialCustomerState: CustomersState = {
     loading: false,
     loadingMsg: '',
@@ -168,7 +256,124 @@ export function customerReducer(
                 message: action.payload.message,
                 code: action.payload.code
             }
-        }               
+        }  
+        
+        case CustomersActionTypes.GET_CUSTOMER_DETAIL: {
+            return {
+                ...state,
+                loading: true,
+                loadingMsg: 'Get Customer Detail...'
+            }
+        }
+        case CustomersActionTypes.GET_CUSTOMER_DETAIL_SUCCESS: {
+            return {
+                ...state,
+                loading: false,
+                loadingMsg: '',
+                customerDetail: action.payload.customerDetail,
+                message: 'Customer detail sucessfully .'
+            }
+        }
+        case CustomersActionTypes.GET_CUSTOMER_DETAIL_FAIL: {
+            let customers = state.customers;
+            let count = state.count;
+            return {
+                ...state,
+                isError: true,
+                loading: false,
+                message: action.payload.message,
+                code: action.payload.code
+            }
+        } 
+        case CustomersActionTypes.GET_CUSTOMER_BUDGET_DETAIL: {
+            return {
+                ...state,
+                loading: true,
+                loadingMsg: 'Get Customer Budget Detail...'
+            }
+        }
+        case CustomersActionTypes.GET_CUSTOMER_BUDGET_DETAIL_SUCCESS: {
+           /*  console.log(action.payload); */
+            return {
+                ...state,
+                loading: false,
+                loadingMsg: '',
+                budgetDetail: action.payload.budgetDetail,
+                remainingBudget : action.payload.remainingBudget,
+                message: 'Customer Budget detail sucessfully .'
+            }
+        }
+        case CustomersActionTypes.GET_CUSTOMER_BUDGET_DETAIL_FAIL: {
+            let customers = state.customers;
+            let count = state.count;
+            return {
+                ...state,
+                isError: true,
+                loading: false,
+                message: action.payload.message,
+                code: action.payload.code
+            }
+        } 
+
+        case CustomersActionTypes.GET_CUSTOMER_USERS: {
+            return {
+                ...state,
+                loading: true,
+                loadingMsg: 'Get Customer Budget Detail...'
+            }
+        }
+        case CustomersActionTypes.GET_CUSTOMER_USERS_SUCCESS: {
+           /*  console.log(action.payload); */
+            return {
+                ...state,
+                loading: false,
+                loadingMsg: '',
+                customerUserList : action.payload.userList,
+                count : action.payload.count,
+                message: 'Customer Budget detail sucessfully .'
+            }
+        }
+        case CustomersActionTypes.GET_CUSTOMER_USERS_FAIL: {
+            let customers = state.customers;
+            let count = state.count;
+            return {
+                ...state,
+                isError: true,
+                loading: false,
+                message: action.payload.message,
+                code: action.payload.code
+            }
+        } 
+
+        case CustomersActionTypes.CUSTOMER_DETAIL_UPDATE: {
+            return {
+                ...state,
+                loading: true,
+                loadingMsg: 'Update customer detail...'
+            }
+        }
+        case CustomersActionTypes.CUSTOMER_DETAIL_UPDATE_SUCCESS: {
+           /*  console.log(action.payload); */
+            return {
+                ...state,
+                loading: false,
+                loadingMsg: '',
+                //customers : action.payload.customers,
+                count : action.payload.count,
+                message: 'Update customer detail success .'
+            }
+        }
+        case CustomersActionTypes.CUSTOMER_DETAIL_UPDATE_FAIL: {
+            let customers = state.customers;
+            let count = state.count;
+            return {
+                ...state,
+                isError: true,
+                loading: false,
+                message: action.payload.message,
+                code: action.payload.code
+            }
+        } 
 
         default:
             return state;

@@ -18,8 +18,10 @@ export class EquipmentTypeListComponent implements OnInit {
   form: FormGroup ;
   loading: boolean = false;
   loadingMsg: string = '';
+  pathHash: string;
   
   ngOnInit() {
+    this.pathHash = window.location.hash;
     this.store.select(selectorTraining).subscribe(
       (equipmentTypeState: TrainingState) => {
         //console.log("Equipment state 222", equipmentTypeState);

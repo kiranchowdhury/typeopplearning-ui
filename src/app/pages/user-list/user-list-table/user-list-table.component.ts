@@ -15,12 +15,13 @@ export class UserListTableComponent implements OnInit {
 
   @Input() mode: string;
   @Output() removeUserEvent: EventEmitter<User> = new EventEmitter();
-
+  pathHsh: string;
   userList: User[];
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.pathHsh = window.location.hash;
     this.store.select( selectorUserList ).subscribe(
       (userListState: UserListState) => {
         console.log('------user list--------', this.mode);

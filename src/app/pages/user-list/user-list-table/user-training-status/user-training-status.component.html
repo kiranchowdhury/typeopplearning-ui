@@ -1,0 +1,15 @@
+<table class="table table-hover">
+  <thead>
+    <tr class="table-header">
+      <th scope="col">Training Name</th>
+      <th scope="col">Status</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let usrTrn of userTrnData">
+          <td >{{usrTrn.trainingName}}</td>
+          <td ><tl-status-dot [status]="usrTrn.staus"></tl-status-dot> {{usrTrn.staus}}</td>
+          
+      </tr>
+  </tbody>

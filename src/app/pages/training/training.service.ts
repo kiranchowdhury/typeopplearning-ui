@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiConnectorService } from '../../@core/api-handlers/api-connector.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { TrainingContract , EquipmentTypeRes, EquipmentTypeContract, 
-  EquipmentTypeIdRequest, EquipmentDataContract} from './training-contract';
+  EquipmentTypeIdRequest, EquipmentDataContract, EquipmentDetailReq, EquipmentDetailContract} from './training-contract';
 import { map } from 'rxjs/internal/operators';
 
 @Injectable({
@@ -30,5 +30,10 @@ export class TrainingService {
     )
   }
 
+  getTrainingStartData(payload: EquipmentDetailReq): Observable<EquipmentDetailContract> {
+    return this.apiConnector.get('/api/training/start/detail', payload).pipe(
+      map((resp: EquipmentDetailContract) => resp)
+    )
+  }
 
 }

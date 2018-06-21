@@ -5,7 +5,8 @@ import { PurchaseTrainingComponent } from './purchase-training/purchase-training
 import { AllowedTrainingComponent } from './allowed-training/allowed-training.component';
 import { BudgetComponent } from './budget/budget.component';
 import { LoginGuard } from '../../@core/guards/login.guard';
-import { PurchaseEquipmentTypeComponent} from './purchase-training/purchase-equipment-type/purchase-equipment-type.component'
+import { PurchaseEquipmentTypeComponent} from './purchase-training/purchase-equipment-type/purchase-equipment-type.component';
+import { InvoicesComponent} from './invoices/invoices.component'
 
 const routes: Routes = [{
   path: '',
@@ -26,6 +27,10 @@ const routes: Routes = [{
   }, {
     path: 'budget',
     component: BudgetComponent,
+    canActivate: [LoginGuard]
+  }, {
+    path: 'invoices',
+    component: InvoicesComponent,
     canActivate: [LoginGuard]
   }, {
     path: '',

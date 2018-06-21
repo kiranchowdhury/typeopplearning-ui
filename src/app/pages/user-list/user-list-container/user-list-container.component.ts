@@ -16,11 +16,13 @@ export class UserListContainerComponent implements OnInit {
   loading: boolean = false;
   loadingMsg: string = '';
   mode: string = 'view';
-
+  
   constructor(private store: Store<AppState>,
   private modalService: NgbModal) { }
 
   ngOnInit() {
+    
+    
     this.store.dispatch( new GetUserListAction() )
   }
 
